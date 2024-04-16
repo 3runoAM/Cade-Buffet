@@ -23,6 +23,22 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#presence" do
+    it 'should have a name' do
+      owner = User.new(email: 'email', password: 'password', role: :owner)
+
+      result = owner.valid?
+      expect(result).to eq false
+    end
+
+    it 'should have an email' do
+      owner = User.new(name: "Mateus Alves", password: 'password', role: :client)
+
+      result = owner.valid?
+      expect(result).to eq false
+    end
+  end
+
   describe ".role_options" do
     it 'should translate properly' do
       role_options = User.role_options

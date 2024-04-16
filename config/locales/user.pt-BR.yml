@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    attributes:
+      user:
+        name: "Nome"
+        role: "Tipo de conta"
+        roles:
+          client: "Cliente"
+          owner: "Proprietário de Buffet"

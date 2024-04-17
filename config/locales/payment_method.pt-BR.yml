@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      payment_method:
+        one: 'Método de pagamento'
+        other: 'Métodos de pagamento'
+    attributes:
+      payment_method:
+        name: 'Nome'

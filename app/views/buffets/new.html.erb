@@ -1,0 +1,85 @@
+<h1>Cadastrar novo Buffet</h1>
+
+<%= form_with model: @buffet do |buffet| %>
+  <div>
+    <%= buffet.label :brand_name %><br/>
+    <%= buffet.text_field :brand_name %>
+  </div>
+  <br/>
+
+  <div>
+    <%= buffet.label :company_name %><br/>
+    <%= buffet.text_field :company_name %>
+  </div>
+  <br/>
+
+  <div>
+    <%= buffet.label :crn %><br/>
+    <%= buffet.text_field :crn %>
+  </div>
+  <br/>
+
+  <div>
+    <%= buffet.label :phone %><br/>
+    <%= buffet.text_field :phone %>
+  </div>
+  <br/>
+
+  <div>
+    <%= buffet.label :email %><br/>
+    <%= buffet.email_field :email %>
+  </div>
+  <br/>
+
+  <%= buffet.fields_for :address do |address| %>
+  <div>
+    <%= address.label :street_name %><br/>
+    <%= address.text_field :street_name %>
+  </div>
+  <br/>
+
+  <div>
+    <%= address.label :house_or_lot_number %><br/>
+    <%= address.text_field :house_or_lot_number %>
+  </div>
+  <br/>
+
+  <div>
+    <%= address.label :neighborhood %><br/>
+    <%= address.text_field :neighborhood %>
+  </div>
+  <br/>
+
+  <div>
+    <%= address.label :city %><br/>
+    <%= address.text_field :city %>
+  </div>
+  <br/>
+
+  <div>
+    <%= address.label :state %><br/>
+    <%= address.text_field :state %>
+  </div>
+  <br/>
+
+  <div>
+    <%= address.label :zip %><br/>
+    <%= address.text_field :zip %>
+  </div>
+  <br/>
+  <% end %>
+
+  <div>
+    <%= buffet.label :description %><br/>
+    <%= buffet.text_area :description %>
+  </div>
+  <br/>
+
+  <div>
+    <%= buffet.label :payment_method_ids %><br/>
+    <%= buffet.collection_check_boxes :payment_method_ids, PaymentMethod.all, :id, :name, include_hidden: false %>
+  </div>
+  <br/>
+
+  <%= buffet.submit %>
+<% end %>

@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      address:
+        one: 'Endereço'
+        other: 'Endereços'
+    attributes:
+      address:
+        street_name: 'Rua'
+        neighborhood: 'Bairro'
+        house_or_lot_number: 'Número ou lote'
+        state: 'Estado'
+        city: 'Cidade'
+        zip: 'Cep'
+        buffet_id: 'Buffet'

@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      buffet_payment_method:
+        one: 'Método de pagamento'
+        other: 'Métodos de pagamento'
+    attributes:
+      buffet_payment_method:
+        payment_method_id: 'Método de pagamento'
+        buffet_id: 'Buffet'

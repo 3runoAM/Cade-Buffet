@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      buffet:
+        one: 'Buffet'
+        other: 'Buffets'
+    attributes:
+      buffet:
+        user_id: 'Proprietário'
+        brand_name: 'Nome fantasia'
+        company_name: 'Razão social'
+        crn: 'CNPJ'
+        phone: 'Telefone'
+        description: 'Descrição'
+        payment_method_ids: "Métodos de pagamento"

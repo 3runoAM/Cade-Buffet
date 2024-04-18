@@ -34,7 +34,7 @@ RSpec.configure do |config|
     driven_by(:rack_test)
   end
 
-  config.include Devise::Test::IntegrationHelpers, type: :system
+  config.include Warden::Test::Helpers
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [

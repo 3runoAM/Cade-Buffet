@@ -1,17 +1,16 @@
 class BuffetsController < ApplicationController
   before_action :authenticate_owner, only: [:new, :create]
+  before_action :set_buffet, only: [:edit, :show, :edit, :update]
+  before_action :check_buffet_owner, only: [:update]
+
   def new
     @buffet = Buffet.new
     @buffet.build_address
   end
 
   def create
-    @buffet = Buffet.new(params.require(:buffet).permit(:brand_name, :company_name, :crn, :phone, :email,
-                                                        :description, address_attributes: [:street_name,
-                                                         :house_or_lot_number, :neighborhood, :city, :state, :zip],
-                                                        payment_method_ids: []))
+    @buffet = Buffet.new(buffet_params)
     @buffet.user_id = current_user.id
-    puts params
     if @buffet.save
       return redirect_to @buffet, notice: "#{@buffet.brand_name} criado com sucesso!"
     else
@@ -21,7 +20,33 @@ class BuffetsController < ApplicationController
     render 'new'
   end
 
-  def show
+  def show; end
+
+  def edit; end
+
+  def update
+    if @buffet.update(buffet_params)
+      return redirect_to @buffet, notice: 'Buffet atualizado com sucesso'
+    end
+    flash.now[:notice] = 'Erro ao atualizar Buffet'
+    render 'edit'
+  end
+
+  private
+
+  def set_buffet
     @buffet = Buffet.find params[:id]
+  end
+
+  def buffet_params
+    params.require(:buffet).permit(:brand_name, :company_name, :crn, :phone, :email,
+                                   :description, address_attributes: [:street_name,
+                                    :house_or_lot_number, :neighborhood, :city, :state, :zip],
+                                   payment_method_ids: [])
+  end
+
+  def check_buffet_owner
+    set_buffet
+    redirect_to root_path, notice: "Acesso negado" if current_user.id != @buffet.user_id
   end
 end

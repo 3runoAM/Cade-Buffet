@@ -5,8 +5,7 @@ RSpec.describe User, type: :model do
     it "is invalid with an invalid email" do
       owner = User.new(name: "Mateus Alves", email: 'email', password: 'password', role: :owner)
 
-      result = owner.valid?
-      expect(result).to eq false
+      expect(owner).not_to be_valid
     end
 
     it 'is invalid with a non-existent role' do
@@ -17,9 +16,8 @@ RSpec.describe User, type: :model do
 
     it 'should be valid' do
       owner = User.new(name: "Mateus Alves", email: 'example@example.com', password: 'password', role: :client)
-      result = owner.valid?
 
-      expect(result).to eq true
+      expect(owner).to be_valid
     end
   end
 
@@ -27,15 +25,13 @@ RSpec.describe User, type: :model do
     it 'should have a name' do
       owner = User.new(email: 'email', password: 'password', role: :owner)
 
-      result = owner.valid?
-      expect(result).to eq false
+      expect(owner).not_to be_valid
     end
 
     it 'should have an email' do
       owner = User.new(name: "Mateus Alves", password: 'password', role: :client)
 
-      result = owner.valid?
-      expect(result).to eq false
+      expect(owner).not_to be_valid
     end
   end
 

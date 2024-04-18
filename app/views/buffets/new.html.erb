@@ -1,5 +1,15 @@
 <h1>Cadastrar novo Buffet</h1>
 
+
+<% if @buffet.errors.any? %>
+  <p>Verifique os erros abaixo: </p>
+  <ul>
+    <% @buffet.errors.full_messages.each do |e| %>
+      <li> <%= e %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_with model: @buffet do |buffet| %>
   <div>
     <%= buffet.label :brand_name %><br/>
@@ -77,9 +87,9 @@
 
   <div>
     <%= buffet.label :payment_method_ids %><br/>
-    <%= buffet.collection_check_boxes :payment_method_ids, PaymentMethod.all, :id, :name, include_hidden: false %>
+    <%= buffet.collection_check_boxes :payment_method_ids, PaymentMethod.all, :id, :name %>
   </div>
   <br/>
 
-  <%= buffet.submit %>
+  <%= buffet.submit data: {turbo: false} %>
 <% end %>

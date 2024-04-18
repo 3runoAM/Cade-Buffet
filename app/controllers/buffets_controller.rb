@@ -13,8 +13,6 @@ class BuffetsController < ApplicationController
     @buffet.user_id = current_user.id
     if @buffet.save
       return redirect_to @buffet, notice: "#{@buffet.brand_name} criado com sucesso!"
-    else
-      puts @buffet.errors.full_messages
     end
     flash.now[:notice] = 'Problemas ao criar Buffet'
     render 'new'
@@ -40,7 +38,7 @@ class BuffetsController < ApplicationController
 
   def buffet_params
     params.require(:buffet).permit(:brand_name, :company_name, :crn, :phone, :email,
-                                   :description, address_attributes: [:street_name,
+                                   :description, address_attributes: [:id, :street_name,
                                     :house_or_lot_number, :neighborhood, :city, :state, :zip],
                                    payment_method_ids: [])
   end

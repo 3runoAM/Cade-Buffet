@@ -36,7 +36,7 @@ describe "Owner has to register a Buffet" do
     expect(page).to have_unchecked_field 'Cartão de débito'
   end
 
-  it 'and register it successfully' do
+  it 'and do it successfully' do
     PaymentMethod.create(name: 'Pix')
     PaymentMethod.create(name: 'Cartão de crédito')
     PaymentMethod.create(name: 'Cartão de débito')
@@ -63,5 +63,18 @@ describe "Owner has to register a Buffet" do
 
     expect(current_path).to eq buffet_path(1)
     expect(page).to have_content "Buffet do Mateus criado com sucesso!"
+    expect(page).to have_content 'M.A. LTDA'
+    expect(page).to have_content '589.123.545-69'
+    expect(page).to have_content '(83)95555-5555'
+    expect(page).to have_content 'mateus@example.com'
+    expect(page).to have_content 'Pix'
+    expect(page).to have_content 'Cartão de débito'
+    expect(page).to have_content 'Rua dos planetas'
+    expect(page).to have_content '963'
+    expect(page).to have_content 'Sistema solar'
+    expect(page).to have_content 'Via lactea'
+    expect(page).to have_content 'Universo'
+    expect(page).to have_content '00000-00'
+    expect(page).to have_content 'Buffet infantil'
   end
 end

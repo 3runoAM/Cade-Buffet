@@ -9,14 +9,14 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.is_a?(User) && resource.role == 'owner' && resource.buffet.nil?
-      return new_buffet_path
+      return new_owner_buffet_path
     end
     super
   end
 
   def ensure_registered_buffet
     unless current_user.nil?
-      redirect_to new_buffet_path if current_user.role == 'owner' && current_user.buffet.nil?
+      redirect_to new_owner_buffet_path if current_user.role == 'owner' && current_user.buffet.nil?
     end
   end
 

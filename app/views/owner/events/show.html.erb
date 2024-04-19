@@ -1,0 +1,13 @@
+<h1><%= @event.name %></h1>
+
+<div>
+  <p><%= @event.description %></p>
+  <p><%= Event.human_attribute_name(:min_guests) %>: <%= @event.min_guests %></p>
+  <p><%= Event.human_attribute_name(:max_guests) %>: <%= @event.max_guests %></p>
+  <p><%= Event.human_attribute_name(:standard_duration) %>: <%= @event.standard_duration %> minutos</p>
+  <p><%= Event.human_attribute_name(:menu) %>: <%= @event.menu %></p>
+  <p><%= Event.human_attribute_name(:offsite_event) %>: <%= @event.offsite_event_status %></p>
+  <p><%= Event.human_attribute_name(:offers_alcohol) %>: <%= @event.offers_alcohol_status %></p>
+  <p><%= Event.human_attribute_name(:offers_decoration) %>: <%= @event.offers_decoration_status %></p>
+  <p><%= Event.human_attribute_name(:offers_valet_parking) %>: <%= @event.offers_valet_parking_status %></p>
+</div>

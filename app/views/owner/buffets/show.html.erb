@@ -1,0 +1,30 @@
+<h1><%= @buffet.company_name %></h1>
+
+
+<div>
+  <p><%= @buffet.brand_name %></p>
+  <p> <%= @buffet.crn %> </p>
+  <p> <%= @buffet.phone %></p>
+  <p> <%= @buffet.email %></p>
+  <p> <%= @buffet.description %></p>
+</div>
+
+<h2>Endereço</h2>
+<div>
+  <p> <%= @buffet.address.street_name %></p>
+  <p> <%= @buffet.address.house_or_lot_number %></p>
+  <p> <%= @buffet.address.neighborhood %></p>
+  <p> <%= @buffet.address.city %></p>
+  <p> <%= @buffet.address.state %></p>
+  <p> <%= @buffet.address.zip %></p>
+</div>
+
+<h2>Métodos de pagamento</h2>
+<% @buffet.payment_methods.each do |payment_method| %>
+  <p><%= payment_method.name %></p>
+<% end %>
+<br/>
+
+<% if current_user.id == @buffet.user_id %>
+  <%= link_to "Editar Buffet", edit_owner_buffet_path(@buffet) %>
+<% end %>

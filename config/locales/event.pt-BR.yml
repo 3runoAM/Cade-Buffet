@@ -1,0 +1,19 @@
+pt-BR:
+  activerecord:
+    models:
+      event:
+        one: "Evento"
+        other: "Eventos"
+    attributes:
+      event:
+        name: "Nome"
+        description: "Descrição"
+        min_guests: "Número mínimo de convidados"
+        max_guests: "Número máximo de convidados"
+        standard_duration: "Duração do evento (em minutos)"
+        menu: "Cardápio"
+        offsite_event: "Evento externo"
+        offers_alcohol: "Inclui bebidas alcoólicas"
+        offers_decoration: "Inclui decoração"
+        offers_valet_parking: "Inclui serviço de estacionamento"
+        buffet_id: "Buffet"

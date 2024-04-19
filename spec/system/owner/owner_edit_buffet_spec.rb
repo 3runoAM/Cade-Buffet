@@ -16,7 +16,7 @@ describe "Owner edit's buffet"  do
                     state: 'State 1', city: 'City 1', zip: '11111', buffet_id: first_buffet.id)
 
     login_as first_owner
-    visit buffet_path(first_buffet.id)
+    visit owner_buffet_path(first_buffet.id)
     click_on 'Editar'
 
     expect(page).to have_field 'Nome fantasia'
@@ -54,7 +54,7 @@ describe "Owner edit's buffet"  do
                     state: 'State 1', city: 'City 1', zip: '11111', buffet_id: buffet.id)
 
     login_as owner
-    visit buffet_path(buffet.id)
+    visit owner_buffet_path(buffet.id)
     click_on 'Editar'
 
     fill_in 'Nome fantasia', with: 'Buffet do Mateus'
@@ -73,7 +73,7 @@ describe "Owner edit's buffet"  do
     fill_in 'Descrição', with: 'Buffet infantil'
     click_on "Atualizar Buffet"
 
-    expect(current_path).to eq buffet_path(buffet.id)
+    expect(current_path).to eq owner_buffet_path(buffet.id)
     expect(page).to have_content 'Buffet atualizado com sucesso'
     expect(page).to have_content 'M.A. LTDA'
     expect(page).to have_content '589.123.545-69'

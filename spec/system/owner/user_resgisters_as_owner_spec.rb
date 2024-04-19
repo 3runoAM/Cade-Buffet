@@ -20,12 +20,13 @@ describe "User register as buffet owner" do
 
     expect(page).not_to have_link "Cadastrar"
     expect(page).to have_content "Boas-vindas! Você realizou seu registro com sucesso."
+    expect(page).to have_link "Área do proprietário"
   end
 
   it 'and should be redirected to the Buffet registration right after' do
     visit root_path
     sign_up
 
-    expect(current_path).to eq new_buffet_path
+    expect(current_path).to eq new_owner_buffet_path
   end
 end

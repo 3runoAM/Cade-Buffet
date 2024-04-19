@@ -13,6 +13,7 @@ RSpec.describe "Buffets", type: :request do
                                 crn: '123456', phone: '111-111-1111', email: 'buffet1@example.com',
                                 description: 'Description 1')
       first_buffet.payment_methods << payment_method_a
+      first_buffet.payment_methods << payment_method_b
       first_buffet.save!
 
       second_buffet = Buffet.new(user_id: second_owner.id, brand_name: 'Buffet 2', company_name: 'Company 2',
@@ -28,7 +29,7 @@ RSpec.describe "Buffets", type: :request do
 
       login_as first_owner
 
-      patch(buffet_path(second_buffet.id), params: { buffet: { brand_name: "Deactivated Buffet" } })
+      patch(owner_buffet_path(second_buffet.id), params: { buffet: { brand_name: "Deactivated Buffet" } })
 
       expect(response).to redirect_to(root_path)
     end

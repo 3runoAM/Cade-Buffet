@@ -6,7 +6,7 @@ describe "Owner has to register a Buffet" do
     sign_up
     click_on 'Cadê Buffet?'
 
-    expect(current_path).to eq new_buffet_path
+    expect(current_path).to eq new_owner_buffet_path
   end
 
   it 'and sees all required fields' do
@@ -61,7 +61,7 @@ describe "Owner has to register a Buffet" do
 
     click_on 'Criar Buffet'
 
-    expect(current_path).to eq buffet_path(1)
+    expect(current_path).to eq owner_buffet_path(1)
     expect(page).to have_content "Buffet do Mateus criado com sucesso!"
     expect(page).to have_content 'M.A. LTDA'
     expect(page).to have_content '589.123.545-69'

@@ -1,4 +1,4 @@
-class BuffetsController < ApplicationController
+class Owner::BuffetsController < ApplicationController
   before_action :authenticate_owner, only: [:new, :create]
   before_action :set_buffet, only: [:edit, :show, :edit, :update]
   before_action :check_buffet_owner, only: [:update]
@@ -12,7 +12,7 @@ class BuffetsController < ApplicationController
     @buffet = Buffet.new(buffet_params)
     @buffet.user_id = current_user.id
     if @buffet.save
-      return redirect_to @buffet, notice: "#{@buffet.brand_name} criado com sucesso!"
+      return redirect_to [:owner, @buffet], notice: "#{@buffet.brand_name} criado com sucesso!"
     end
     flash.now[:notice] = 'Problemas ao criar Buffet'
     render 'new'
@@ -24,7 +24,7 @@ class BuffetsController < ApplicationController
 
   def update
     if @buffet.update(buffet_params)
-      return redirect_to @buffet, notice: 'Buffet atualizado com sucesso'
+      return redirect_to [:owner, @buffet], notice: 'Buffet atualizado com sucesso'
     end
     flash.now[:notice] = 'Erro ao atualizar Buffet'
     render 'edit'

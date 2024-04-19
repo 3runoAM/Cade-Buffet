@@ -1,6 +1,6 @@
 <h1>Editando <%= @buffet.brand_name %></h1>
 
-<%= form_with model: @buffet do |buffet| %>
+<%= form_with model: [:owner, @buffet] do |buffet| %>
 
   <% if @buffet.errors.any? %>
     <p>Verifique os erros abaixo: </p>

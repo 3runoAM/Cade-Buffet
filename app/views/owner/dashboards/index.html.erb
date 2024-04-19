@@ -1,0 +1,20 @@
+<h1>Área do proprietário</h1>
+
+<div>
+  <h2><%= @buffet.brand_name %></h2>
+  <p><%= @buffet.description %></p>
+  <%= link_to 'Ver detalhes', owner_buffet_path(@buffet.id) %>
+</div>
+
+<div>
+  <h2>Eventos cadastrados</h2>
+  <%= link_to "Cadastrar evento", new_owner_buffet_event_path(@buffet.id) %>
+
+  <% if @events.empty? %>
+  <p>Nenhum evento cadastrado.</p>
+  <% else %>
+    <% @events.each do |e| %>
+      <p><%= e %></p>
+    <% end %>
+  <% end %>
+</div>

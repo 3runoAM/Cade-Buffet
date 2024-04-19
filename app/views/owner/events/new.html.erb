@@ -1,0 +1,74 @@
+<h1>Novo Evento</h1>
+
+<% if @event.errors.any? %>
+  <p>Verifique os erros abaixo</p>
+  <ul>
+    <% @event.errors.full_messages.each do |e| %>
+      <li><%= e %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: [:owner, @buffet, @event] do |event| %>
+  <div>
+    <%= event.label :name %>
+    <%= event.text_field :name %>
+  </div>
+  <br/>
+
+  <div>
+    <%= event.label :description %>
+    <%= event.text_field :description %>
+  </div>
+  <br/>
+
+  <div>
+    <%= event.label :min_guests %>
+    <%= event.number_field :min_guests %>
+  </div>
+  <br/>
+
+  <div>
+    <%= event.label :max_guests %>
+    <%= event.number_field :max_guests %>
+  </div>
+  <br/>
+
+  <div>
+    <%= event.label :standard_duration %>
+    <%= event.number_field :standard_duration %>
+  </div>
+  <br/>
+
+  <div>
+    <%= event.label :menu %>
+    <%= event.text_area :menu %>
+  </div>
+  <br/>
+
+  <div>
+    <%= event.label :offsite_event %>
+    <%= event.check_box :offsite_event %>
+  </div>
+  <br/>
+
+  <div>
+    <%= event.label :offers_alcohol %>
+    <%= event.check_box :offers_alcohol %>
+  </div>
+  <br/>
+
+  <div>
+    <%= event.label :offers_decoration %>
+    <%= event.check_box :offers_decoration %>
+  </div>
+  <br/>
+
+  <div>
+    <%= event.label :offers_valet_parking %>
+    <%= event.check_box :offers_valet_parking %>
+  </div>
+  <br/>
+
+  <%= event.submit data: {turbo: false} %>
+<% end %>

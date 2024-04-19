@@ -2,12 +2,29 @@
 
 <div>
   <p><%= @event.description %></p>
-  <p><%= Event.human_attribute_name(:min_guests) %>: <%= @event.min_guests %></p>
-  <p><%= Event.human_attribute_name(:max_guests) %>: <%= @event.max_guests %></p>
-  <p><%= Event.human_attribute_name(:standard_duration) %>: <%= @event.standard_duration %> minutos</p>
+  <p>Número de convidados: de <%= @event.min_and_max_guests_format %></p>
+  <p><%= Event.human_attribute_name(:standard_duration) %>: <%= @event.convert_to_hours %></p>
   <p><%= Event.human_attribute_name(:menu) %>: <%= @event.menu %></p>
   <p><%= Event.human_attribute_name(:offsite_event) %>: <%= @event.offsite_event_status %></p>
   <p><%= Event.human_attribute_name(:offers_alcohol) %>: <%= @event.offers_alcohol_status %></p>
   <p><%= Event.human_attribute_name(:offers_decoration) %>: <%= @event.offers_decoration_status %></p>
   <p><%= Event.human_attribute_name(:offers_valet_parking) %>: <%= @event.offers_valet_parking_status %></p>
+
+  <%= link_to 'Editar evento', edit_owner_buffet_event_path(@buffet.id, @event.id) %>
 </div>
+
+<div>
+  <% @event.event_prices.each do |event_price| %>
+  <h2> <%= I18n.t("activerecord.attributes.event_price.day_types.#{event_price.day_type}")%></h2>
+  <p><%= EventPrice.human_attribute_name(:standard_price) %>: <%= number_to_currency(event_price.standard_price) %></p>
+  <p><%= EventPrice.human_attribute_name(:extra_guest_price) %>: <%= number_to_currency(event_price.extra_guest_price) %></p>
+  <p><%= EventPrice.human_attribute_name(:extra_hour_price) %>: <%= number_to_currency(event_price.extra_hour_price) %></p>
+
+  <%= link_to 'Editar preço', edit_owner_buffet_event_event_price_path(@buffet.id, @event.id, event_price.id) %>
+  <% end  %>
+</div>
+
+<% if @event.event_prices.count == 2 %>
+<% else %>
+  <%= link_to 'Cadastrar Preço', new_owner_buffet_event_event_price_path(@buffet.id, @event.id) %>
+<% end %>

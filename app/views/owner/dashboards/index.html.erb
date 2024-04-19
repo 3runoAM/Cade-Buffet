@@ -13,8 +13,11 @@
   <% if @events.empty? %>
   <p>Nenhum evento cadastrado.</p>
   <% else %>
+    <dl>
     <% @events.each do |e| %>
-      <p><%= e %></p>
-    <% end %>
+      <dt><%= link_to e.name,  owner_buffet_event_path(@buffet.id, e.id) %></dt>
+      <dd><%= e.description %></dd>
+    </dl>
   <% end %>
 </div>
+<% end %>

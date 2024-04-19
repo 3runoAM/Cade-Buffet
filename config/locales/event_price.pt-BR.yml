@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    models:
+      event_price:
+        one: "Preço do evento"
+        other: "Preços do evento"
+    attributes:
+      event_price:
+        event_id: "Evento"
+        standard_price: "Preço mínimo"
+        extra_guest_price: "Adicional por convidado extra"
+        extra_hour_price: "Adicional por hora extra"
+        day_type: "Tipo de evento"
+        day_types:
+          weekday: "Evento em dia de semana"
+          weekend: "Evento em final de semana"

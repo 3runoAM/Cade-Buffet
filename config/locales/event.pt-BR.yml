@@ -10,7 +10,7 @@ pt-BR:
         description: "Descrição"
         min_guests: "Número mínimo de convidados"
         max_guests: "Número máximo de convidados"
-        standard_duration: "Duração do evento (em minutos)"
+        standard_duration: "Duração do evento"
         menu: "Cardápio"
         offsite_event: "Evento externo"
         offers_alcohol: "Inclui bebidas alcoólicas"

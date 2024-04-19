@@ -1,6 +1,5 @@
 <h1><%= @buffet.company_name %></h1>
 
-
 <div>
   <p><%= @buffet.brand_name %></p>
   <p> <%= @buffet.crn %> </p>
@@ -9,14 +8,9 @@
   <p> <%= @buffet.description %></p>
 </div>
 
-<h2>Endereço</h2>
 <div>
-  <p> <%= @buffet.address.street_name %></p>
-  <p> <%= @buffet.address.house_or_lot_number %></p>
-  <p> <%= @buffet.address.neighborhood %></p>
-  <p> <%= @buffet.address.city %></p>
-  <p> <%= @buffet.address.state %></p>
-  <p> <%= @buffet.address.zip %></p>
+  <h2>Endereço</h2>
+  <p> <%= @buffet.address.full_address %></p>
 </div>
 
 <h2>Métodos de pagamento</h2>

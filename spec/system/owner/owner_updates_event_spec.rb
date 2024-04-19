@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User register event' do
+describe "Owner updates Event" do
   it 'and the form has all the fields to do so' do
     owner = User.create!(name: 'Fabrício', email: 'owner@example.com', password: 'password1', role: :owner)
     payment_method_a = PaymentMethod.create!(name: 'Pix')
@@ -13,11 +13,17 @@ describe 'User register event' do
     buffet.save!
     Address.create!(street_name: 'Street 1', neighborhood: 'Neighborhood 1', house_or_lot_number: '1',
                     state: 'State 1', city: 'City 1', zip: '11111', buffet_id: buffet.id)
+    Event.create!(name: 'Festa de 15 anos', description: 'Buffet para festa de 15 anos',
+                  min_guests: 10, max_guests: 50, standard_duration: 300,
+                  menu: 'Bolo, salgados, doces, refrigerantes, bebidas alcoólicas',offsite_event: true,
+                  offers_alcohol: true, offers_decoration: true, offers_valet_parking: false, buffet_id: buffet.id)
 
     login_as owner
     visit root_path
     click_on 'Área do proprietário'
-    click_on 'Cadastrar evento'
+    click_on 'Festa de 15 anos'
+
+    click_on 'Editar evento'
 
     expect(page).to have_field 'Nome'
     expect(page).to have_field 'Descrição'
@@ -30,7 +36,6 @@ describe 'User register event' do
     expect(page).to have_field 'Inclui decoração'
     expect(page).to have_field 'Inclui serviço de estacionamento'
   end
-
   it 'sucessfully' do
     owner = User.create!(name: 'Fabrício', email: 'owner@example.com', password: 'password1', role: :owner)
     payment_method_a = PaymentMethod.create!(name: 'Pix')
@@ -43,34 +48,40 @@ describe 'User register event' do
     buffet.save!
     Address.create!(street_name: 'Street 1', neighborhood: 'Neighborhood 1', house_or_lot_number: '1',
                     state: 'State 1', city: 'City 1', zip: '11111', buffet_id: buffet.id)
+    Event.create!(name: 'Festa de 15 anos', description: 'Buffet para festa de 15 anos',
+                  min_guests: 10, max_guests: 50, standard_duration: 300,
+                  menu: 'Bolo, salgados, doces, refrigerantes, bebidas alcoólicas',offsite_event: true,
+                  offers_alcohol: true, offers_decoration: true, offers_valet_parking: false, buffet_id: buffet.id)
 
     login_as owner
     visit root_path
     click_on 'Área do proprietário'
-    click_on 'Cadastrar evento'
+    click_on 'Festa de 15 anos'
 
-    fill_in 'Nome', with: 'Festa de 15 anos'
-    fill_in 'Descrição', with: 'Buffet para festa de 15 anos'
-    fill_in 'Número mínimo de convidados', with: '10'
-    fill_in 'Número máximo de convidados', with: '50'
-    fill_in 'Duração do evento', with: '300'
-    fill_in 'Cardápio', with: 'Bolo, salgados, doces, refrigerantes, bebidas alcoólicas'
+    click_on 'Editar evento'
+
+    fill_in 'Nome', with: 'Festa de 18 anos'
+    fill_in 'Descrição', with: 'Buffet para festa de 18 anos'
+    fill_in 'Número mínimo de convidados', with: 20
+    fill_in 'Número máximo de convidados', with: 100
+    fill_in 'Duração do evento', with: 600
+    fill_in 'Cardápio', with: 'Bolo, salgados, doces, refrigerantes, bebidas alcoólicas, jantar'
     check 'Evento externo'
     check 'Inclui bebidas alcoólicas'
     check 'Inclui decoração'
+    uncheck 'Inclui serviço de estacionamento'
 
-    click_on "Criar Evento"
+    click_on 'Atualizar Evento'
 
-    expect(current_path).to eq owner_buffet_event_path(1, 1)
-    expect(page).to have_content "Evento criado com sucesso"
-    expect(page).to have_content 'Festa de 15 anos'
-    expect(page).to have_content 'Buffet para festa de 15 anos'
-    expect(page).to have_content 'Número de convidados: de 10 a 50'
-    expect(page).to have_content 'Duração do evento: 5h'
-    expect(page).to have_content 'Cardápio: Bolo, salgados, doces, refrigerantes, bebidas alcoólicas'
-    expect(page).to have_content 'Evento externo: Sim'
-    expect(page).to have_content 'Inclui bebidas alcoólicas: Sim'
-    expect(page).to have_content 'Inclui decoração: Sim'
-    expect(page).to have_content 'Inclui serviço de estacionamento: Não'
+    expect(page).to have_content('Festa de 18 anos')
+    expect(page).to have_content('Buffet para festa de 18 anos')
+    expect(page).to have_content('20')
+    expect(page).to have_content('100')
+    expect(page).to have_content('10h')
+    expect(page).to have_content('Bolo, salgados, doces, refrigerantes, bebidas alcoólicas, jantar')
+    expect(page).to have_content('Sim')
+    expect(page).to have_content('Sim')
+    expect(page).to have_content('Sim')
+    expect(page).to have_content('Não')
   end
 end

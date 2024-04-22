@@ -20,11 +20,11 @@
   <p><%= EventPrice.human_attribute_name(:extra_guest_price) %>: <%= number_to_currency(event_price.extra_guest_price) %></p>
   <p><%= EventPrice.human_attribute_name(:extra_hour_price) %>: <%= number_to_currency(event_price.extra_hour_price) %></p>
 
-  <%= link_to 'Editar preço', edit_owner_buffet_event_event_price_path(@buffet.id, @event.id, event_price.id) %>
+  <%= link_to 'Editar preço', edit_owner_event_price_path(event_price.id, event_id: @event.id) %>
   <% end  %>
 </div>
 
 <% if @event.event_prices.count == 2 %>
 <% else %>
-  <%= link_to 'Cadastrar Preço', new_owner_buffet_event_event_price_path(@buffet.id, @event.id) %>
+  <%= link_to 'Cadastrar Preço', new_owner_event_price_path(event_id: @event.id) %>
 <% end %>

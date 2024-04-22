@@ -12,7 +12,7 @@ class Owner::BuffetsController < ApplicationController
     @buffet = Buffet.new(buffet_params)
     @buffet.user_id = current_user.id
     if @buffet.save
-      return redirect_to owner_buffet_path(@buffet.id), notice: "#{@buffet.brand_name} criado com sucesso!"
+      return redirect_to owner_buffet_path(@buffet), notice: "#{@buffet.brand_name} criado com sucesso!"
     end
     flash.now[:notice] = 'Problemas ao criar Buffet'
     render 'new'
@@ -24,7 +24,7 @@ class Owner::BuffetsController < ApplicationController
 
   def update
     if @buffet.update(buffet_params)
-      return redirect_to owner_buffet_path(@buffet.id), notice: 'Buffet atualizado com sucesso'
+      return redirect_to owner_buffet_path(@buffet), notice: 'Buffet atualizado com sucesso'
     end
     flash.now[:notice] = 'Erro ao atualizar Buffet'
     render 'edit'

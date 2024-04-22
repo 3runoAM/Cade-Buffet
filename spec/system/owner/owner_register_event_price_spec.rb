@@ -96,7 +96,7 @@ describe 'Owner register event price' do
 
     click_on 'Cadastrar preço do evento'
 
-    expect(current_path).to eq  owner_buffet_event_path(buffet.id, event.id)
+    expect(current_path).to eq owner_buffet_event_path(buffet.id, event.id)
     expect(page).to have_content 'Evento em final de semana'
     expect(page).to have_content 'R$ 2.000,00'
     expect(page).to have_content 'R$ 100,00'

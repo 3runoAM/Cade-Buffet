@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
   before_action :ensure_registered_buffet
-  def index; end
+  def index
+    @buffets = Buffet.all
+  end
 end

@@ -9,7 +9,7 @@
   </ul>
 <% end %>
 
-<%= form_with model: [:owner, @buffet, @event, @event_price] do |price|%>
+<%= form_with model: [:owner, @event_price] do |price|%>
   <div>
     <%= price.label :standard_price %>
     <%= price.number_field :standard_price %>
@@ -32,6 +32,8 @@
     <%= price.label :day_type %>
     <%= price.collection_select :day_type, EventPrice.day_type_options, :first, :last %>
   </div>
+
+  <%= price.hidden_field :event_id, value: @event.id %>
 
   <%= price.submit "Cadastrar preço do evento", data: { turbo: false }%>
 <% end %>

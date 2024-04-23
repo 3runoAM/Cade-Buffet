@@ -1,15 +1,13 @@
 class Owner::EventPricesController < ApplicationController
+  before_action :check_event, only: [:new, :edit, :create, :update]
   def new
-    check_event Event.find params[:event_id]
     @event_price = EventPrice.new
   end
 
   def create
-    check_event Event.find(params[:event_price][:event_id])
-    @buffet = @event.buffet
     @event_price = @event.event_prices.build(event_price_params)
     if @event.save
-      redirect_to owner_buffet_event_path(@buffet.id, @event.id), notice: 'Preço cadastrado com sucesso'
+      redirect_to owner_buffet_event_path(@event.buffet, @event), notice: 'Preço cadastrado com sucesso'
     else
       flash.now[:alert] = 'Não foi possível cadastrar o preço'
       render 'new'
@@ -17,16 +15,13 @@ class Owner::EventPricesController < ApplicationController
   end
 
   def edit
-    check_event Event.find(params[:event_id])
     @event_price = EventPrice.find params[:id]
   end
 
   def update
-    check_event Event.find(params[:event_price][:event_id])
-    @buffet = @event.buffet
     @event_price = EventPrice.find params[:id]
     if @event_price.update(event_price_params)
-      redirect_to owner_buffet_event_path(@buffet.id, @event.id), notice: 'Preço atualizado com sucesso'
+      redirect_to owner_buffet_event_path(@event.buffet, @event), notice: 'Preço atualizado com sucesso'
     else
       flash.now[:alert] = 'Não foi possível atualizar o preço'
       render 'edit'
@@ -39,7 +34,8 @@ class Owner::EventPricesController < ApplicationController
     params.require(:event_price).permit(:standard_price, :extra_guest_price, :extra_hour_price, :day_type)
   end
 
-  def check_event(event)
+  def check_event
+    event = Event.find params[:event_id] || params[:event_price][:event_id]
     if event.buffet.user == current_user
       @event = event
     else

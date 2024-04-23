@@ -10,7 +10,7 @@ class Owner::BuffetsController < ApplicationController
 
   def create
     @buffet = Buffet.new(buffet_params)
-    @buffet.user_id = current_user.id
+    @buffet.user = current_user
     if @buffet.save
       return redirect_to owner_buffet_path(@buffet), notice: "#{@buffet.brand_name} criado com sucesso!"
     end
@@ -45,6 +45,6 @@ class Owner::BuffetsController < ApplicationController
 
   def check_buffet_owner
     set_buffet
-    redirect_to root_path, notice: "Acesso negado" if current_user.id != @buffet.user_id
+    redirect_to root_path, notice: "Acesso negado" if current_user != @buffet.user
   end
 end

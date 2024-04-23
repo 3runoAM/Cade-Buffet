@@ -8,8 +8,10 @@ class Buffet < ApplicationRecord
   accepts_nested_attributes_for :buffet_payment_methods
 
   validates :brand_name, presence: true
+  validates :brand_name, uniqueness: true
   validates :company_name, presence: true
   validates :crn, presence: true
+  validates :brand_name, uniqueness: true
   validates :phone, presence: true
   validates :email, presence: true
   validates :description, presence: true

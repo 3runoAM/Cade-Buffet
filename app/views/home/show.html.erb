@@ -1,0 +1,35 @@
+<h1><%= @buffet.brand_name %></h1>
+
+<div>
+  <p><%= Buffet.human_attribute_name :description %>: <%= @buffet.description %></p>
+  <p><%= Buffet.human_attribute_name :crn %>: <%= @buffet.crn %> </p>
+  <p><%= Buffet.human_attribute_name :phone %>: <%= @buffet.phone %></p>
+  <p><%= Buffet.human_attribute_name :email %>: <%= @buffet.email %></p>
+</div>
+
+<div>
+  <h2><%= Buffet.human_attribute_name :address %></h2>
+  <p> <%= @buffet.address.full_address %></p>
+</div>
+
+<h2><%= Buffet.human_attribute_name :payment_methods %></h2>
+<% @buffet.payment_methods.each do |payment_method| %>
+  <p><%= payment_method.name %></p>
+<% end %>
+<br/>
+
+<h2><%= Event.model_name.human(count: @events.count) %></h2>
+  <% @events.each do |event| %>
+  <div>
+    <h3><%= event.name %></h3>
+    <p><%= event.description %></p>
+    <p>Número de convidados: de <%= event.min_and_max_guests_format %></p>
+    <p><%= Event.human_attribute_name(:standard_duration) %>: <%= event.convert_to_hours %></p>
+    <p><%= Event.human_attribute_name(:menu) %>: <%= event.menu %></p>
+    <p><%= Event.human_attribute_name(:offsite_event) %>: <%= event.offsite_event_status %></p>
+    <p><%= Event.human_attribute_name(:offers_alcohol) %>: <%= event.offers_alcohol_status %></p>
+    <p><%= Event.human_attribute_name(:offers_decoration) %>: <%= event.offers_decoration_status %></p>
+    <p><%= Event.human_attribute_name(:offers_valet_parking) %>: <%= event.offers_valet_parking_status %></p>
+  </div>
+  <br/>
+  <% end %>

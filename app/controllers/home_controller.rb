@@ -3,4 +3,9 @@ class HomeController < ApplicationController
   def index
     @buffets = Buffet.all
   end
+
+  def show
+    @buffet = Buffet.find(params[:id])
+    @events = @buffet.events
+  end
 end

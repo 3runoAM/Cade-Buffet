@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   has_many :event_prices
 
   validates :name, presence: true
+  validates :name, uniqueness: { scope: :buffet_id }
   validates :description, presence: true
   validates :min_guests, presence: true
   validates :max_guests, presence: true

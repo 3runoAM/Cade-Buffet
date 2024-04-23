@@ -12,5 +12,6 @@ pt-BR:
         crn: 'CNPJ'
         phone: 'Telefone'
         description: 'Descrição'
+        address: 'Endereço'
         payment_methods: 'Métodos de pagamento'
         payment_method_ids: "Métodos de pagamento"

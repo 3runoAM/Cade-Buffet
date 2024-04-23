@@ -30,6 +30,21 @@
     <p><%= Event.human_attribute_name(:offers_alcohol) %>: <%= event.offers_alcohol_status %></p>
     <p><%= Event.human_attribute_name(:offers_decoration) %>: <%= event.offers_decoration_status %></p>
     <p><%= Event.human_attribute_name(:offers_valet_parking) %>: <%= event.offers_valet_parking_status %></p>
+    <div>
+      <h3><%= EventPrice.model_name.human %></h3>
+      <dl>
+        <% event.event_prices.each do |event_price| %>
+          <dt>
+            <b><%= I18n.t("activerecord.attributes.event_price.day_types.#{event_price.day_type}")%></b>
+          </dt>
+          <dd>
+            <p><%= EventPrice.human_attribute_name(:standard_price) %>: <%= number_to_currency(event_price.standard_price) %></p>
+            <p><%= EventPrice.human_attribute_name(:extra_guest_price) %>: <%= number_to_currency(event_price.extra_guest_price) %></p>
+            <p><%= EventPrice.human_attribute_name(:extra_hour_price) %>: <%= number_to_currency(event_price.extra_hour_price) %></p>
+          </dd>
+        <% end %>
+      </dl>
+    </div>
   </div>
   <br/>
   <% end %>

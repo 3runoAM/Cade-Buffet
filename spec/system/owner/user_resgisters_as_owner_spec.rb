@@ -5,7 +5,7 @@ describe "User register as buffet owner" do
     visit root_path
     click_on "Cadastrar"
 
-    within 'form' do
+    within '#registration' do
       expect(page).to have_field 'Nome'
       expect(page).to have_field 'Tipo de conta'
       expect(page).to have_field 'E-mail'

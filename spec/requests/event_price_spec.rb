@@ -5,7 +5,6 @@ RSpec.describe "EventPrices", type: :request do
     it "but doesn't owns the Buffet that holds the Event" do
       payment_method_a = PaymentMethod.create!(name: 'Payment Method 1')
       payment_method_b = PaymentMethod.create!(name: 'Payment Method 2')
-
       first_owner = User.create!(name: 'Fabrício', email: 'email_first_owner@example.com',
                                  password: 'password1', role: :owner)
       first_buffet = Buffet.new(user: first_owner, brand_name: 'Buffet 1', company_name: 'Company 1',
@@ -15,7 +14,7 @@ RSpec.describe "EventPrices", type: :request do
       first_buffet.payment_methods << payment_method_b
       first_buffet.save!
       Address.create!(street_name: 'Street 1', neighborhood: 'Neighborhood 1', house_or_lot_number: '1',
-                     state: 'State 1', city: 'City 1', zip: '11111', buffet: first_buffet)
+                      state: 'State 1', city: 'City 1', zip: '11111', buffet: first_buffet)
 
       second_owner = User.create!(name: 'Carlos', email: 'email_second_owner@example.com',
                                   password: 'password2', role: :owner)

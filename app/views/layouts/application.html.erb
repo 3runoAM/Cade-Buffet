@@ -15,13 +15,16 @@
       <h1><%= link_to "Cadê Buffet?", root_path %></h1>
       <ul>
         <% if user_signed_in? %>
+          <p><%= current_user.name %> | <%= current_user.email %></p>
           <% if current_user.role == 'owner' %>
           <li><%= link_to "Área do proprietário", owner_dashboards_path %></li>
           <% else %>
+            <%= render 'shared/search_form' %>
             <li><%= link_to "Área do cliente", root_path %></li>
           <% end %>
           <li><%= button_to 'Sair', destroy_user_session_path, method: :delete %></li>
         <% else %>
+          <%= render 'shared/search_form' %>
           <li><%= link_to 'Cadastrar', new_user_registration_path %></li>
           <li><%= link_to 'Login', new_user_session_path %></li>
         <% end %>

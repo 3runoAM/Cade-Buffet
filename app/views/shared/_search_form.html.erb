@@ -1,0 +1,6 @@
+<%= form_with url: search_owner_buffets_url, method: :get, id: 'search' do |f| %>
+  <%= f.label :query, 'Buscar Buffet' %>
+  <%= f.text_field :query %>
+
+  <%= f.button 'Buscar' %>
+<% end %>

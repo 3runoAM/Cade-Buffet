@@ -1,6 +1,6 @@
 def sign_up
   click_on "Cadastrar"
-  within 'form' do
+  within '#registration' do
     fill_in 'Nome', with: 'Mateus Alves'
     select 'Proprietário de Buffet', from: 'Tipo de conta'
     fill_in 'E-mail', with: 'mateus@exemplo.com'

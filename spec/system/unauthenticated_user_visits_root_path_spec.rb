@@ -36,12 +36,12 @@ describe 'Unauthenticated user visits root_path' do
     visit root_path
 
     expect(page).to have_link 'Buffet 1'
-    expect(page).to have_content 'Em: City 1 - State 1'
+    expect(page).to have_content 'Localizado em: City 1 - State 1'
     expect(page).to have_link 'Buffet 2'
-    expect(page).to have_content 'Em: City 2 - State 2'
+    expect(page).to have_content 'Localizado em: City 2 - State 2'
   end
 
-  it 'and sees all registered buffets and click on buffet link' do
+  it "sees all registered buffets and click on buffet's link" do
     payment_method_a = PaymentMethod.create!(name: 'Payment Method 1')
     payment_method_b = PaymentMethod.create!(name: 'Payment Method 2')
     
@@ -106,5 +106,69 @@ describe 'Unauthenticated user visits root_path' do
     expect(page).to have_content 'Inclui bebidas alcoólicas: Sim'
     expect(page).to have_content 'Inclui decoração: Sim'
     expect(page).to have_content 'Inclui serviço de estacionamento: Sim'
+  end
+
+  it 'and sees the search form for buffets' do
+    visit root_path
+
+    within "nav" do
+      expect(page).to have_field 'Buscar Buffet'
+      expect(page).to have_button 'Buscar'
+    end
+  end
+
+  it 'and finds a buffet by name' do
+    create_buffets
+
+    visit root_path
+    within "nav" do
+      fill_in 'Buscar Buffet', with: 'Buffet'
+      click_on 'Buscar'
+    end
+
+    expect(page).to have_link 'Buffet 1'
+    expect(page).to have_content 'Localizado em: City 1 - State 1'
+    expect(page).to have_link 'Buffet 2'
+    expect(page).to have_content 'Localizado em: City 2 - State 2'
+  end
+  it 'and sees event details' do
+    create_buffets_with_events
+
+    visit root_path
+    within "nav" do
+      fill_in 'Buscar Buffet', with: 'Buffet'
+      click_on 'Buscar'
+    end
+    click_on 'Buffet 1'
+
+    expect(page).to have_content 'Buffet 1'
+    expect(page).to have_content 'Descrição: Description 1'
+    expect(page).to have_content 'CNPJ: 123456'
+    expect(page).to have_content 'Telefone: 111-111-1111'
+    expect(page).to have_content 'buffet1@example.com'
+    expect(page).to have_content 'Endereço'
+    expect(page).to have_content 'Street 1, 1, Neighborhood 1, City 1 - State 1, 11111'
+    expect(page).to have_content 'Métodos de pagamento'
+    expect(page).to have_content 'Payment Method 1'
+    expect(page).to have_content 'Payment Method 2'
+    expect(page).to have_content 'Evento'
+    expect(page).to have_content 'Event 1'
+    expect(page).to have_content 'Description 1'
+    expect(page).to have_content 'Número de convidados: de 10 a 100'
+    expect(page).to have_content 'Duração do evento: 5h'
+    expect(page).to have_content 'Cardápio: Menu 1'
+    expect(page).to have_content 'Evento externo: Não'
+    expect(page).to have_content 'Inclui bebidas alcoólicas: Sim'
+    expect(page).to have_content 'Inclui decoração: Sim'
+    expect(page).to have_content 'Inclui serviço de estacionamento: Sim'
+    expect(page).to have_content 'Preço do evento'
+    expect(page).to have_content 'Evento em dia de semana'
+    expect(page).to have_content 'Preço mínimo: R$ 1.000,00'
+    expect(page).to have_content 'Adicional por convidado extra: R$ 100,00'
+    expect(page).to have_content 'Adicional por hora extra: R$ 50'
+    expect(page).to have_content 'Evento em final de semana'
+    expect(page).to have_content 'Preço mínimo: R$ 1.500,00'
+    expect(page).to have_content 'Adicional por convidado extra: R$ 150,00'
+    expect(page).to have_content 'Adicional por hora extra: R$ 75'
   end
 end

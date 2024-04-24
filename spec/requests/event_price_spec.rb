@@ -8,7 +8,7 @@ RSpec.describe "EventPrices", type: :request do
       first_owner = User.create!(name: 'Fabrício', email: 'email_first_owner@example.com',
                                  password: 'password1', role: :owner)
       first_buffet = Buffet.new(user: first_owner, brand_name: 'Buffet 1', company_name: 'Company 1',
-                                crn: '123456', phone: '111-111-1111', email: 'buffet1@example.com',
+                                crn: '59.182.557/0001-33', phone: '111-111-1111', email: 'buffet1@example.com',
                                 description: 'Description 1')
       first_buffet.payment_methods << payment_method_a
       first_buffet.payment_methods << payment_method_b
@@ -19,7 +19,7 @@ RSpec.describe "EventPrices", type: :request do
       second_owner = User.create!(name: 'Carlos', email: 'email_second_owner@example.com',
                                   password: 'password2', role: :owner)
       second_buffet = Buffet.new(user: second_owner, brand_name: 'Buffet 2', company_name: 'Company 2',
-                                 crn: '654321', phone: '222-222-2222', email: 'buffet2@example.com',
+                                 crn: '42.218.645/0001-45', phone: '222-222-2222', email: 'buffet2@example.com',
                                  description: 'Description 2')
       second_buffet.payment_methods << payment_method_a
       second_buffet.payment_methods << payment_method_b
@@ -48,7 +48,7 @@ RSpec.describe "EventPrices", type: :request do
       first_owner = User.create!(name: 'Fabrício', email: 'email_first_owner@example.com',
                                  password: 'password1', role: :owner)
       first_buffet = Buffet.new(user: first_owner, brand_name: 'Buffet 1', company_name: 'Company 1',
-                                crn: '123456', phone: '111-111-1111', email: 'buffet1@example.com',
+                                crn: '42.218.645/0001-45', phone: '111-111-1111', email: 'buffet1@example.com',
                                 description: 'Description 1')
       first_buffet.payment_methods << payment_method_a
       first_buffet.payment_methods << payment_method_b
@@ -58,7 +58,7 @@ RSpec.describe "EventPrices", type: :request do
 
       second_owner = User.create!(name: 'Carlos', email: 'email_second_owner@example.com', password: 'password2', role: :owner)
       second_buffet = Buffet.new(user: second_owner, brand_name: 'Buffet 2', company_name: 'Company 2',
-                                 crn: '654321', phone: '222-222-2222', email: 'buffet2@example.com',
+                                 crn: '23.261.499/0001-96', phone: '222-222-2222', email: 'buffet2@example.com',
                                  description: 'Description 2')
       second_buffet.payment_methods << payment_method_a
       second_buffet.payment_methods << payment_method_b

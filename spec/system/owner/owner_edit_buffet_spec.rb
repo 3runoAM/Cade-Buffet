@@ -7,7 +7,7 @@ describe "Owner edit's buffet"  do
     first_owner = User.create!(name: 'Fabrício', email: 'email_first_owner@example.com', password: 'password1', role: :owner)
 
     first_buffet = Buffet.new(user_id: first_owner.id, brand_name: 'Buffet 1', company_name: 'Company 1',
-                              crn: '123456', phone: '111-111-1111', email: 'buffet1@example.com',
+                              crn: '23.261.499/0001-96', phone: '111-111-1111', email: 'buffet1@example.com',
                               description: 'Description 1')
     first_buffet.payment_methods << payment_method_a
     first_buffet.save!
@@ -44,7 +44,7 @@ describe "Owner edit's buffet"  do
     owner = User.create!(name: 'Fabrício', email: 'email_first_owner@example.com', password: 'password1', role: :owner)
 
     buffet = Buffet.new(user_id: owner.id, brand_name: 'Buffet 1', company_name: 'Company 1',
-                        crn: '123456', phone: '111-111-1111', email: 'buffet1@example.com',
+                        crn: '23.261.499/0001-96', phone: '111-111-1111', email: 'buffet1@example.com',
                         description: 'Description 1')
     buffet.payment_methods << payment_method_a
     buffet.payment_methods << payment_method_c
@@ -59,7 +59,7 @@ describe "Owner edit's buffet"  do
 
     fill_in 'Nome fantasia', with: 'Buffet do Mateus'
     fill_in 'Razão social', with: 'M.A. LTDA'
-    fill_in 'CNPJ', with: '589.123.545-69'
+    fill_in 'CNPJ', with: '23.261.499/0001-96'
     fill_in 'Telefone', with: '(83)95555-5555'
     fill_in 'Email', with: 'mateus@example.com'
     check 'Pix'
@@ -76,7 +76,7 @@ describe "Owner edit's buffet"  do
     expect(current_path).to eq owner_buffet_path(buffet.id)
     expect(page).to have_content 'Buffet atualizado com sucesso'
     expect(page).to have_content 'M.A. LTDA'
-    expect(page).to have_content '589.123.545-69'
+    expect(page).to have_content '23.261.499/0001-96'
     expect(page).to have_content '(83)95555-5555'
     expect(page).to have_content 'mateus@example.com'
     expect(page).to have_content 'Pix'

@@ -14,7 +14,7 @@ describe 'Unauthenticated user visits root_path' do
     first_owner = User.create!(name: 'Fabrício', email: 'email_first_owner@example.com',
                                password: 'password1', role: :owner)
     buffet_a = Buffet.new(user: first_owner, brand_name: 'Buffet 1', company_name: 'Company 1',
-                              crn: '123456', phone: '111-111-1111', email: 'buffet1@example.com',
+                              crn: '23.261.499/0001-96', phone: '111-111-1111', email: 'buffet1@example.com',
                               description: 'Description 1')
     buffet_a.payment_methods << payment_method_a
     buffet_a.payment_methods << payment_method_b
@@ -25,7 +25,7 @@ describe 'Unauthenticated user visits root_path' do
     second_owner = User.create!(name: 'Carlos', email: 'email_second_owner@example.com',
                                 password: 'password2', role: :owner)
     buffet_b = Buffet.new(user: second_owner, brand_name: 'Buffet 2', company_name: 'Company 2',
-                               crn: '654321', phone: '222-222-2222', email: 'buffet2@example.com',
+                               crn: '31.602.413/0001-70', phone: '222-222-2222', email: 'buffet2@example.com',
                                description: 'Description 2')
     buffet_b.payment_methods << payment_method_a
     buffet_b.payment_methods << payment_method_b
@@ -48,7 +48,7 @@ describe 'Unauthenticated user visits root_path' do
     owner_a = User.create!(name: 'Fabrício', email: 'email_first_owner@example.com',
                                password: 'password1', role: :owner)
     buffet_a = Buffet.new(user: owner_a, brand_name: 'Buffet A', company_name: 'Company A',
-                              crn: '123456', phone: '111-111-1111', email: 'buffet1@example.com',
+                              crn: '23.261.499/0001-96', phone: '111-111-1111', email: 'buffet1@example.com',
                               description: 'Description A')
     buffet_a.payment_methods << payment_method_a
     buffet_a.payment_methods << payment_method_b
@@ -67,7 +67,7 @@ describe 'Unauthenticated user visits root_path' do
     owner_b = User.create!(name: 'Carlos', email: 'email_second_owner@example.com',
                                 password: 'password2', role: :owner)
     buffet_b = Buffet.new(user: owner_b, brand_name: 'Buffet 2', company_name: 'Company 2',
-                               crn: '654321', phone: '222-222-2222', email: 'buffet2@example.com',
+                               crn: '31.602.413/0001-70', phone: '222-222-2222', email: 'buffet2@example.com',
                                description: 'Description 2')
     buffet_b.payment_methods << payment_method_a
     buffet_b.payment_methods << payment_method_b
@@ -88,7 +88,7 @@ describe 'Unauthenticated user visits root_path' do
 
     expect(page).to have_content 'Buffet A'
     expect(page).to have_content 'Descrição: Description A'
-    expect(page).to have_content 'CNPJ: 123456'
+    expect(page).to have_content 'CNPJ: 23.261.499/0001-96'
     expect(page).to have_content 'Telefone: 111-111-1111'
     expect(page).to have_content 'Email: buffet1@example.com'
     expect(page).to have_content 'Endereço'
@@ -143,7 +143,7 @@ describe 'Unauthenticated user visits root_path' do
 
     expect(page).to have_content 'Buffet 1'
     expect(page).to have_content 'Descrição: Description 1'
-    expect(page).to have_content 'CNPJ: 123456'
+    expect(page).to have_content 'CNPJ: 31.602.413/0001-70'
     expect(page).to have_content 'Telefone: 111-111-1111'
     expect(page).to have_content 'buffet1@example.com'
     expect(page).to have_content 'Endereço'

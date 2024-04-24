@@ -79,8 +79,9 @@ RSpec.describe EventPrice, type: :model do
     describe "For a given event, day_type must be unique in EventPrice" do
       it "invalid" do
         user = User.create!(email: "teste@teste.com", password: "senha123", name: "Teste", role: :owner)
-        buffet = Buffet.new(user: user, brand_name: "Buffet Teste", company_name: "Empresa Teste", crn: "123456",
-                            phone: "11999999999", email: "buffet@teste.com", description: "Um teste")
+        buffet = Buffet.new(user: user, brand_name: "Buffet Teste", company_name: "Empresa Teste",
+                            crn: "39.359.775/0001-93", phone: "11999999999", email: "buffet@teste.com",
+                            description: "Um teste")
         buffet.payment_methods << PaymentMethod.create!(name: "Dinheiro")
         buffet.payment_methods << PaymentMethod.create!(name: "Pix")
         buffet.save!
@@ -100,8 +101,9 @@ RSpec.describe EventPrice, type: :model do
       end
       it "valid" do
         user = User.create!(email: "teste@teste.com", password: "senha123", name: "Teste", role: :owner)
-        buffet = Buffet.new(user: user, brand_name: "Buffet Teste", company_name: "Empresa Teste", crn: "123456",
-                            phone: "11999999999", email: "buffet@teste.com", description: "Um teste")
+        buffet = Buffet.new(user: user, brand_name: "Buffet Teste", company_name: "Empresa Teste",
+                            crn: "39.359.775/0001-93", phone: "11999999999", email: "buffet@teste.com",
+                            description: "Um teste")
         buffet.payment_methods << PaymentMethod.create!(name: "Dinheiro")
         buffet.payment_methods << PaymentMethod.create!(name: "Pix")
         buffet.save!

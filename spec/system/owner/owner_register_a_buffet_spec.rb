@@ -12,7 +12,7 @@ describe "Buffet owner register a buffet" do
 
     expect(page).to have_content 'Buffet do Mateus'
     expect(page).to have_content 'M.A. LTDA'
-    expect(page).to have_content '589.123.545-69'
+    expect(page).to have_content '23.261.499/0001-96'
     expect(page).to have_content '(83)95555-5555'
     expect(page).to have_content 'mateus@example.com'
     expect(page).to have_content 'Pix'

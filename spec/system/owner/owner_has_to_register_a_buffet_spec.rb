@@ -46,7 +46,7 @@ describe "Owner has to register a Buffet" do
 
     fill_in 'Nome fantasia', with: 'Buffet do Mateus'
     fill_in 'Razão social', with: 'M.A. LTDA'
-    fill_in 'CNPJ', with: '589.123.545-69'
+    fill_in 'CNPJ', with: '23.261.499/0001-96'
     fill_in 'Telefone', with: '(83)95555-5555'
     fill_in 'Email', with: 'mateus@example.com'
     check 'Pix'
@@ -64,7 +64,7 @@ describe "Owner has to register a Buffet" do
     expect(current_path).to eq owner_buffet_path(1)
     expect(page).to have_content "Buffet do Mateus criado com sucesso!"
     expect(page).to have_content 'M.A. LTDA'
-    expect(page).to have_content '589.123.545-69'
+    expect(page).to have_content '23.261.499/0001-96'
     expect(page).to have_content '(83)95555-5555'
     expect(page).to have_content 'mateus@example.com'
     expect(page).to have_content 'Pix'

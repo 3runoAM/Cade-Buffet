@@ -11,15 +11,21 @@ class Buffet < ApplicationRecord
   validates :brand_name, uniqueness: true
   validates :company_name, presence: true
   validates :crn, presence: true
+  validates :crn, uniqueness: true
   validates :brand_name, uniqueness: true
   validates :phone, presence: true
   validates :email, presence: true
   validates :description, presence: true
   validate :at_least_one_payment_method
+  validate :valid_crn
 
   private
 
   def at_least_one_payment_method
     errors.add(:payment_methods, "deve ter no mínimo uma opção selecionada") if payment_methods.empty?
+  end
+
+  def valid_crn
+    errors.add(:crn, "inválido") unless CNPJ.valid?(crn)
   end
 end

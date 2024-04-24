@@ -3,6 +3,7 @@ pt-BR:
     attributes:
       user:
         name: "Nome"
+        cpf: "CPF"
         role: "Tipo de conta"
         roles:
           client: "Cliente"

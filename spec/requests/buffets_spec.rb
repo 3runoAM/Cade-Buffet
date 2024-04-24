@@ -10,14 +10,14 @@ RSpec.describe "Buffets", type: :request do
       payment_method_b = PaymentMethod.create!(name: 'Payment Method 2')
 
       first_buffet = Buffet.new(user_id: first_owner.id, brand_name: 'Buffet 1', company_name: 'Company 1',
-                                crn: '123456', phone: '111-111-1111', email: 'buffet1@example.com',
+                                crn: '39.359.775/0001-93', phone: '111-111-1111', email: 'buffet1@example.com',
                                 description: 'Description 1')
       first_buffet.payment_methods << payment_method_a
       first_buffet.payment_methods << payment_method_b
       first_buffet.save!
 
       second_buffet = Buffet.new(user_id: second_owner.id, brand_name: 'Buffet 2', company_name: 'Company 2',
-                                 crn: '654321', phone: '222-222-2222', email: 'buffet2@example.com',
+                                 crn: '94.985.368/0001-08', phone: '222-222-2222', email: 'buffet2@example.com',
                                  description: 'Description 2')
       second_buffet.payment_methods << payment_method_b
       second_buffet.save!
@@ -42,14 +42,14 @@ RSpec.describe "Buffets", type: :request do
       payment_method_b = PaymentMethod.create!(name: 'Payment Method 2')
 
       first_buffet = Buffet.new(user_id: first_owner.id, brand_name: 'Buffet 1', company_name: 'Company 1',
-                                crn: '123456', phone: '111-111-1111', email: 'buffet1@example.com',
+                                crn: '94.985.368/0001-08', phone: '111-111-1111', email: 'buffet1@example.com',
                                 description: 'Description 1')
       first_buffet.payment_methods << payment_method_a
       first_buffet.payment_methods << payment_method_b
       first_buffet.save!
 
       second_buffet = Buffet.new(user_id: second_owner.id, brand_name: 'Buffet 2', company_name: 'Company 2',
-                                 crn: '654321', phone: '222-222-2222', email: 'buffet2@example.com',
+                                 crn: '59.182.557/0001-33', phone: '222-222-2222', email: 'buffet2@example.com',
                                  description: 'Description 2')
       second_buffet.payment_methods << payment_method_b
       second_buffet.save!

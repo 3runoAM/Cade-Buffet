@@ -1,7 +1,7 @@
 def register_buffet
   fill_in 'Nome fantasia', with: 'Buffet do Mateus'
   fill_in 'Razão social', with: 'M.A. LTDA'
-  fill_in 'CNPJ', with: '589.123.545-69'
+  fill_in 'CNPJ', with: '23.261.499/0001-96'
   fill_in 'Telefone', with: '(83)95555-5555'
   fill_in 'Email', with: 'mateus@example.com'
   check 'Pix'

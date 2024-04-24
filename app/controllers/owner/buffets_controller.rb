@@ -1,7 +1,7 @@
 class Owner::BuffetsController < ApplicationController
-  before_action :authenticate_owner, only: [:new, :create]
+  before_action :authenticate_owner, only: [:new, :create, :edit, :update]
   before_action :set_buffet, only: [:edit, :show, :edit, :update]
-  before_action :check_buffet_owner, only: [:update]
+  before_action :check_buffet_owner, only: [:edit, :update]
 
   def new
     @buffet = Buffet.new
@@ -30,19 +30,6 @@ class Owner::BuffetsController < ApplicationController
     render 'edit'
   end
 
-  def search
-    query = params[:query]
-    records_by_attributes = Buffet.where("brand_name LIKE :query OR company_name LIKE :query OR crn LIKE :query
-                                         OR description LIKE :query", query: "%#{query}%")
-
-    records_by_event = Buffet.joins(:events).where("events.name LIKE :query OR events.description LIKE :query",
-                                            query: "%#{query}%")
-
-    @buffets = (records_by_attributes + records_by_event).uniq
-
-    render partial: 'shared/unauthenticathed_user_buffet_form', locals: { buffets: @buffets }
-  end
-
   private
 
   def set_buffet
@@ -58,6 +45,6 @@ class Owner::BuffetsController < ApplicationController
 
   def check_buffet_owner
     set_buffet
-    redirect_to root_path, notice: "Acesso negado" if current_user != @buffet.user
+    redirect_to root_path, notice: "Acesso negado." if current_user != @buffet.user
   end
 end

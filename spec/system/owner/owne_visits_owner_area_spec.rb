@@ -6,7 +6,7 @@ describe "Owner visits owner area" do
     payment_method_a = PaymentMethod.create!(name: 'Pix')
     payment_method_b = PaymentMethod.create!(name: 'Cartão de crédito')
     buffet = Buffet.new(user_id: owner.id, brand_name: 'Buffet 1', company_name: 'Company 1',
-                        crn: '123456', phone: '111-111-1111', email: 'buffet1@example.com',
+                        crn: '23.261.499/0001-96', phone: '111-111-1111', email: 'buffet1@example.com',
                         description: 'Description 1')
     buffet.payment_methods << payment_method_a
     buffet.payment_methods << payment_method_b
@@ -26,7 +26,7 @@ describe "Owner visits owner area" do
     payment_method_a = PaymentMethod.create!(name: 'Pix')
     payment_method_b = PaymentMethod.create!(name: 'Cartão de crédito')
     buffet = Buffet.new(user_id: owner.id, brand_name: 'Buffet 1', company_name: 'Company 1',
-                              crn: '123456', phone: '111-111-1111', email: 'buffet1@example.com',
+                              crn: '23.261.499/0001-96', phone: '111-111-1111', email: 'buffet1@example.com',
                               description: 'Description 1')
     buffet.payment_methods << payment_method_a
     buffet.payment_methods << payment_method_b

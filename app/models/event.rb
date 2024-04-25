@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :buffet
   has_many :event_prices
+  has_many_attached :photos
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :buffet_id }

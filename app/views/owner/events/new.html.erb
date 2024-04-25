@@ -47,6 +47,12 @@
   <br/>
 
   <div>
+    <%= event.label :photos %>
+    <%= event.file_field :photos, multiple: true, direct_upload: true%>
+  </div>
+  <br/>
+
+  <div>
     <%= event.label :offsite_event %>
     <%= event.check_box :offsite_event %>
   </div>

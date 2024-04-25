@@ -26,6 +26,11 @@
     <p>Número de convidados: de <%= event.min_and_max_guests_format %></p>
     <p><%= Event.human_attribute_name(:standard_duration) %>: <%= event.convert_to_hours %></p>
     <p><%= Event.human_attribute_name(:menu) %>: <%= event.menu %></p>
+    <div>
+      <% event.photos.each do |photo| %>
+        <%= image_tag photo %>
+      <% end %>
+    </div>
     <p><%= Event.human_attribute_name(:offsite_event) %>: <%= event.offsite_event_status %></p>
     <p><%= Event.human_attribute_name(:offers_alcohol) %>: <%= event.offers_alcohol_status %></p>
     <p><%= Event.human_attribute_name(:offers_decoration) %>: <%= event.offers_decoration_status %></p>

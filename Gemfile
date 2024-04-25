@@ -38,6 +38,8 @@ group :development do
   gem "web-console"
 end
 
-gem "devise", "~> 4.9"
+gem "devise"
 
 gem "cpf_cnpj"
+
+gem "image_processing"

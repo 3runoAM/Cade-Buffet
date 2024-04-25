@@ -25,6 +25,7 @@ describe 'User register event' do
     expect(page).to have_field 'Número máximo de convidados'
     expect(page).to have_field 'Duração do evento'
     expect(page).to have_field 'Cardápio'
+    expect(page).to have_field 'Fotos do evento'
     expect(page).to have_field 'Evento externo'
     expect(page).to have_field 'Inclui bebidas alcoólicas'
     expect(page).to have_field 'Inclui decoração'
@@ -55,6 +56,7 @@ describe 'User register event' do
     fill_in 'Número máximo de convidados', with: '50'
     fill_in 'Duração do evento', with: '300'
     fill_in 'Cardápio', with: 'Bolo, salgados, doces, refrigerantes, bebidas alcoólicas'
+    attach_file "Fotos do evento", Rails.root.join('spec', 'support', 'images', "placeholder-1.png")
     check 'Evento externo'
     check 'Inclui bebidas alcoólicas'
     check 'Inclui decoração'
@@ -68,6 +70,7 @@ describe 'User register event' do
     expect(page).to have_content 'Número de convidados: de 10 a 50'
     expect(page).to have_content 'Duração do evento: 5h'
     expect(page).to have_content 'Cardápio: Bolo, salgados, doces, refrigerantes, bebidas alcoólicas'
+    expect(page).to have_css("img[src*='placeholder-1.png']")
     expect(page).to have_content 'Evento externo: Sim'
     expect(page).to have_content 'Inclui bebidas alcoólicas: Sim'
     expect(page).to have_content 'Inclui decoração: Sim'

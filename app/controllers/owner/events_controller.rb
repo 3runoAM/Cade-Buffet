@@ -39,6 +39,6 @@ class Owner::EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:name, :description, :min_guests, :max_guests, :standard_duration,
                                   :menu, :offsite_event, :offers_alcohol, :offers_decoration,
-                                  :offers_valet_parking)
+                                  :offers_valet_parking, photos: [])
   end
 end

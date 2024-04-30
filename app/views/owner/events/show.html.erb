@@ -29,7 +29,6 @@
   <% end  %>
 </div>
 
-<% if @event.event_prices.count == 2 %>
-<% else %>
+<% if @event.event_prices.count < 2 %>
   <%= link_to 'Cadastrar Preço', new_owner_event_price_path(event_id: @event.id) %>
 <% end %>

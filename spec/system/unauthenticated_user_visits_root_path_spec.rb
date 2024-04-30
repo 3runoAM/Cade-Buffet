@@ -157,7 +157,7 @@ describe 'Unauthenticated user visits root_path' do
     expect(page).to have_content 'Número de convidados: de 10 a 100'
     expect(page).to have_content 'Duração do evento: 5h'
     expect(page).to have_content 'Cardápio: Menu 1'
-    expect(page).to have_content 'Evento externo: Não'
+    expect(page).to have_content 'Evento externo: Sim'
     expect(page).to have_content 'Inclui bebidas alcoólicas: Sim'
     expect(page).to have_content 'Inclui decoração: Sim'
     expect(page).to have_content 'Inclui serviço de estacionamento: Sim'

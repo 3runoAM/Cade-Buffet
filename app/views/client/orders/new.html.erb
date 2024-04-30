@@ -1,0 +1,41 @@
+<h1>Solicitação de evento</h1>
+
+<dl>
+  <dt>Buffet:</dt>
+  <dd><%= @buffet.brand_name %></dd>
+  <dt>Evento:</dt>
+  <dd><%= @event.name %></dd>
+</dl>
+
+<%= form_with model: [:client, @order] do |order| %>
+  <div>
+    <%= order.label :event_date %>
+    <%= order.date_field :event_date %>
+  </div>
+  <br>
+
+  <div>
+    <%= order.label :total_guests %>
+    <%= order.number_field :total_guests %>
+  </div>
+  <br>
+
+  <% if @event.offsite_event %>
+  <div>
+    <%= order.label :address %>
+    <%= order.text_field :address %>
+  </div>
+  <br>
+  <% end %>
+
+  <div>
+    <%= order.label :additional_info %>
+    <%= order.text_area :additional_info %>
+  </div>
+  <br>
+
+  <%= order.hidden_field :buffet_id, value: @buffet.id %>
+  <%= order.hidden_field :event_id, value: @event.id %>
+
+  <%= order.submit 'Solicitar evento'%>
+<% end %>

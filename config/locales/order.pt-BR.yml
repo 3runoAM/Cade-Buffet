@@ -1,0 +1,22 @@
+pt-BR:
+  activerecord:
+    models:
+      order:
+        one: "Pedido"
+        other: "Pedidos"
+    attributes:
+      order:
+        buffet_id: "Buffet"
+        user_id: "Cliente"
+        event_id: "Evento"
+        event_date: "Data do evento"
+        total_guests: "Número de convidados"
+        address: "Endereço"
+        additional_info: "Informações adicionais"
+        code: "Código do pedido"
+        status: "Status"
+        statuses:
+          pending: "Pendente"
+          confirmed: "Confirmado"
+          rejected: "Rejeitado"
+          approved: "Concluído"

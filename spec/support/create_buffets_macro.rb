@@ -39,7 +39,7 @@ def create_buffets_with_events
                   state: 'State 1', city: 'City 1', zip: '11111', buffet: first_buffet)
   first_event = Event.create!(name: 'Event 1', description: 'Description 1', buffet: first_buffet,
                         min_guests: 10, max_guests: 100, standard_duration: 300, menu: 'Menu 1',
-                        offsite_event: false, offers_alcohol: true, offers_decoration: true,
+                        offsite_event: true, offers_alcohol: true, offers_decoration: true,
                         offers_valet_parking: true)
   first_weekdays_event = EventPrice.create!(event: first_event, standard_price: 1000, extra_guest_price: 100,
                                          extra_hour_price: 50, day_type: :weekday)
@@ -64,4 +64,6 @@ def create_buffets_with_events
                                           extra_hour_price: 100, day_type: :weekday)
   second_weekend_event = EventPrice.create!(event: second_event, standard_price: 2500, extra_guest_price: 250,
                                           extra_hour_price: 125, day_type: :weekend)
+
+  [first_buffet, second_buffet, first_event, second_event]
 end

@@ -15,5 +15,7 @@ Rails.application.routes.draw do
     resources :buffets do
       get 'search', on: :collection
     end
+    resources :orders, only: [:new, :create, :show]
+    resources :dashboards, only: [:index]
   end
 end

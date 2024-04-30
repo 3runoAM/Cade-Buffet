@@ -21,14 +21,14 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_owner
-    unless current_user
-      current_user.role == 'owner'
+    unless current_user || current_user.role == 'owner'
+      redirect_to root_path, notice: 'Você não tem permissão para acessar essa página.'
     end
   end
 
   def authenticate_client
-    unless current_user
-      current_user.role == 'client'
+    unless current_user || current_user.role == 'client'
+      redirect_to root_path, notice: 'Você não tem permissão para acessar essa página.'
     end
   end
 end

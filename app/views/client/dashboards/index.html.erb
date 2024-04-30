@@ -1,0 +1,12 @@
+<h1>Meus pedidos</h1>
+
+<% if @orders.empty? %>
+    <p>Nenhum pedido cadastrado.</p>
+<% else %>
+  <% @orders.each do |order| %>
+    <dl>
+      <dt><%= link_to order.code, @order %></dt>
+      <dd><%= order.event_date.strftime('%d/%m/%Y') %></dd>
+    </dl>
+  <% end %>
+<% end %>

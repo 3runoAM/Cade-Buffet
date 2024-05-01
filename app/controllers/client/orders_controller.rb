@@ -1,5 +1,6 @@
 class  Client::OrdersController < ApplicationController
   before_action :authenticate_client
+  before_action :check_order_owner, only: [:show]
   def new
     @buffet = Buffet.find(params[:buffet_id])
     @event = @buffet.events.find(params[:event_id])
@@ -21,5 +22,12 @@ class  Client::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+  end
+
+  private
+
+  def check_order_owner
+    @order = Order.find(params[:id])
+    redirect_to root_path, notice: "Acesso negado." if current_user.id != @order.user_id
   end
 end

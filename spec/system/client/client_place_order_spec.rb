@@ -74,7 +74,7 @@ describe "Client places order" do
         find('div:nth-child(2)').click_on('Solicitar evento')
       end
 
-      fill_in "Data do evento", with: 1.month.from_now
+      fill_in "Data do evento", with: 1.month.from_now.next_weekday
       fill_in "Número de convidados", with: 50
       fill_in "Endereço", with: "Rua 1, Bairro 1, 1"
       fill_in "Informações adicionais", with: "Informações adicionais do pedido 1 para o evento 1 em Buffet 1 em 1 mês"
@@ -84,10 +84,11 @@ describe "Client places order" do
       expect(page).to have_content "Evento solicitado com sucesso"
       expect(page).to have_content "Buffet: Buffet 1"
       expect(page).to have_content "Evento: Event 1"
-      expect(page).to have_content "Data do evento: #{1.month.from_now.strftime('%d/%m/%Y')}"
+      expect(page).to have_content "Data do evento: #{1.month.from_now.next_weekday.strftime('%d/%m/%Y')}"
       expect(page).to have_content "Número de convidados: 50"
       expect(page).to have_content "Endereço: Rua 1, Bairro 1, 1"
       expect(page).to have_content "Informações adicionais: Informações adicionais do pedido 1 para o evento 1 em Buffet 1 em 1 mês"
+      expect(page).to have_content "Preço: R$ 5.000,00"
       expect(page).to have_content "Código do pedido: #{Order.last.code}"
       expect(page).to have_content "Status: Pendente"
     end
@@ -104,7 +105,7 @@ describe "Client places order" do
         find('div:nth-child(2)').click_on('Solicitar evento')
       end
 
-      fill_in "Data do evento", with: 1.month.from_now
+      fill_in "Data do evento", with: 1.month.from_now.next_weekday
       fill_in "Número de convidados", with: 50
       fill_in "Informações adicionais", with: "Informações adicionais do pedido 1 para o evento 1 em Buffet 1 em 1 mês"
 
@@ -114,10 +115,11 @@ describe "Client places order" do
       expect(page).to have_content "Evento solicitado com sucesso"
       expect(page).to have_content "Buffet: Buffet 1"
       expect(page).to have_content "Evento: Event 1"
-      expect(page).to have_content "Data do evento: #{1.month.from_now.strftime('%d/%m/%Y')}"
+      expect(page).to have_content "Data do evento: #{1.month.from_now.next_weekday.strftime('%d/%m/%Y')}"
       expect(page).to have_content "Número de convidados: 50"
       expect(page).to have_content "Endereço: #{first_buffet.address.full_address}"
       expect(page).to have_content "Informações adicionais: Informações adicionais do pedido 1 para o evento 1 em Buffet 1 em 1 mês"
+      expect(page).to have_content "Preço: R$ 5.000,00"
       expect(page).to have_content "Código do pedido: #{Order.last.code}"
       expect(page).to have_content "Status: Pendente"
     end
@@ -134,7 +136,7 @@ describe "Client places order" do
         find('div:nth-child(2)').click_on('Solicitar evento')
       end
 
-      fill_in "Data do evento", with: 1.month.from_now
+      fill_in "Data do evento", with: 1.month.from_now.next_weekday
       fill_in "Número de convidados", with: 50
       fill_in "Informações adicionais", with: "Informações adicionais do pedido 1 para o evento 2 em Buffet 2 em 1 mês"
       click_on "Solicitar evento"
@@ -143,23 +145,24 @@ describe "Client places order" do
       expect(page).to have_content "Evento solicitado com sucesso"
       expect(page).to have_content "Buffet: Buffet 2"
       expect(page).to have_content "Evento: Event 2"
-      expect(page).to have_content "Data do evento: #{1.month.from_now.strftime('%d/%m/%Y')}"
+      expect(page).to have_content "Data do evento: #{1.month.from_now.next_weekday.strftime('%d/%m/%Y')}"
       expect(page).to have_content "Número de convidados: 50"
       expect(page).to have_content "Endereço: #{second_buffet.address.full_address}"
       expect(page).to have_content "Informações adicionais: Informações adicionais do pedido 1 para o evento 2 em Buffet 2 em 1 mês"
+      expect(page).to have_content "Preço: R$ 10.000,00"
       expect(page).to have_content "Código do pedido: #{Order.last.code}"
       expect(page).to have_content "Status: Pendente"
     end
-  end
 
   it 'and sees all orders' do
     first_buffet, second_buffet, first_event, second_event = create_buffets_with_events
     client = User.create!(email: 'client@client.com', password: 'password', name: "Client", role: :client,
                           cpf: "595.085.920-01")
 
+    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('CODIGO12')
     Order.create!(user_id: client.id, event: first_event, buffet: first_buffet, total_guests: 50, address: "Rua 1, Bairro 1, 1",
                   additional_info: "Informações adicionais do pedido 1 para o evento 1 em Buffet 1 em 1 mês",
-                  event_date: 1.month.from_now, code: "CODIGO12")
+                  event_date: 1.month.from_now.next_weekday, price: 5000)
 
     login_as client
 
@@ -169,6 +172,7 @@ describe "Client places order" do
     expect(current_path).to eq client_dashboards_path
     expect(page).to have_content "Meus pedidos"
     expect(page).to have_content "CODIGO12"
-    expect(page).to have_content 1.month.from_now.strftime('%d/%m/%Y')
+    expect(page).to have_content 1.month.from_now.next_weekday.strftime('%d/%m/%Y')
+  end
   end
 end

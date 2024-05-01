@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :buffet
   belongs_to :event
+  belongs_to :user
   enum status: { pending: 0, confirmed: 1, approved: 2, rejected: 3 }
   before_validation :generate_code, on: :create
   before_validation :set_address_if_blank
@@ -39,6 +40,10 @@ class Order < ApplicationRecord
     if self.total_guests < event.min_guests || self.total_guests > event.max_guests
       errors.add(:total_guests, "deve ser entre #{event.min_guests} e #{event.max_guests}")
     end
+  end
+
+  def has_same_day_order?
+    Order.where("id != ? AND event_date = ? AND buffet_id = ? AND status != ?", id, event_date, buffet_id, "rejected").any?
   end
 
   private

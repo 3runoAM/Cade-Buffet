@@ -1,0 +1,43 @@
+<h1>Solicitações</h1>
+
+<%#= render partial: '/shared/show_orders', locals: { orders_list: @orders } %>
+
+<div>
+  <h2>Eventos pendentes</h2>
+  <%= render partial: '/shared/show_orders', locals: {orders_list: @pending_orders} %>
+</div>
+
+<div>
+  <h2>Eventos confirmados</h2>
+  <%= render partial: '/shared/show_orders', locals: {orders_list: @confirmed_orders} %>
+</div>
+
+<div>
+  <h2>Eventos aprovados</h2>
+  <%= render partial: '/shared/show_orders', locals: {orders_list: @approved_orders} %>
+</div>
+
+<div>
+  <h2>Eventos rejeitados</h2>
+  <%= render partial: '/shared/show_orders', locals: {orders_list: @rejected_orders} %>
+</div>
+
+
+<%# @orders.each do |order| %>
+<!--  <dl>-->
+<!--    <div>-->
+<!--      <dt><%#= Order.human_attribute_name :code %></dt>-->
+<!--      <dd><%#= link_to order.code, owner_order_path(order.id) %></dd>-->
+<!--    </div>-->
+
+<!--    <div>-->
+<!--      <dt><%#= Order.human_attribute_name :event_id %></dt>-->
+<!--      <dd><%#= order.event.name %></dd>-->
+<!--    </div>-->
+
+<!--    <div>-->
+<!--      <dt><%#= Order.human_attribute_name :user_id %></dt>-->
+<!--      <dd><%#= order.user.name %></dd>-->
+<!--    </div>-->
+<!--  </dl>-->
+<%# end %>

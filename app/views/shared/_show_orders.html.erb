@@ -1,0 +1,22 @@
+<% if orders_list.empty? %>
+  <p>Nenhuma socilitação deste tipo.</p>
+<% else %>
+  <% orders_list.each do |order| %>
+    <dl>
+      <div>
+        <dt><%= Order.human_attribute_name :code %></dt>
+        <dd><%= link_to order.code, owner_order_path(order) %></dd>
+      </div>
+
+      <div>
+        <dt><%= Order.human_attribute_name :event_id %></dt>
+        <dd><%= order.event.name %></dd>
+      </div>
+
+      <div>
+        <dt><%= Order.human_attribute_name :user_id %></dt>
+        <dd><%= order.user.name %></dd>
+      </div>
+    </dl>
+  <% end %>
+<% end %>

@@ -6,8 +6,8 @@ Rails.application.routes.draw do
     resources :buffets, only: [:new, :create, :show, :edit, :update] do
       resources :events, only: [:new, :create, :show, :edit, :update]
     end
-
     resources :event_prices, only: [:new, :create, :edit, :update]
+    resources :orders, only: [:index, :show]
     resources :dashboards, only: [:index]
   end
 

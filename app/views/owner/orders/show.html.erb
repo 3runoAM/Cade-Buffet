@@ -1,0 +1,30 @@
+<h1><%= Order.model_name.human %></h1>
+
+<% if @order.has_same_day_order? %>
+  <p>Existe outra solicitação de evento para a mesma data</p>
+<% end %>
+<dl>
+  <dt><%= Order.human_attribute_name :event_id %>:</dt>
+  <dd><%= @order.event.name %></dd>
+
+  <dt><%= Order.human_attribute_name :event_date %>:</dt>
+  <dd><%= @order.event_date.strftime("%d/%m/%Y") %></dd>
+
+  <dt><%= Order.human_attribute_name :total_guests %>:</dt>
+  <dd><%= @order.total_guests %></dd>
+
+  <dt><%= Order.human_attribute_name :address %>:</dt>
+  <dd><%= @order.address %></dd>
+
+  <dt><%= Order.human_attribute_name :additional_info %>:</dt>
+  <dd><%= @order.additional_info %></dd>
+
+  <dt><%= Order.human_attribute_name :price %>:</dt>
+  <dd><%= number_to_currency(@order.price) %></dd>
+
+  <dt><%= Order.human_attribute_name :code %>:</dt>
+  <dd><%= @order.code %></dd>
+
+  <dt><%= Order.human_attribute_name :status %>:</dt>
+  <dd><%= I18n.t("activerecord.attributes.order.statuses.#{@order.status}")%></dd>
+</dl>

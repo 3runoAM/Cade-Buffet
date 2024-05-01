@@ -1,5 +1,14 @@
 <h1>Solicitação de evento</h1>
 
+<% if @order.errors.any? %>
+  <p>Verifique os erros abaixo</p>
+  <ul>
+    <% @order.errors.full_messages.each do |e| %>
+      <li><%= e %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <dl>
   <dt>Buffet:</dt>
   <dd><%= @buffet.brand_name %></dd>

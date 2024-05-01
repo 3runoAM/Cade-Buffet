@@ -18,6 +18,9 @@
   <dt><%= Order.human_attribute_name :additional_info %>:</dt>
   <dd><%= @order.additional_info %></dd>
 
+  <dt><%= Order.human_attribute_name :price %>:</dt>
+  <dd><%= number_to_currency(@order.price) %></dd>
+
   <dt><%= Order.human_attribute_name :code %>:</dt>
   <dd><%= @order.code %></dd>
 

@@ -13,6 +13,7 @@ pt-BR:
         total_guests: "Número de convidados"
         address: "Endereço"
         additional_info: "Informações adicionais"
+        price: "Preço"
         code: "Código do pedido"
         status: "Status"
         statuses:

@@ -153,6 +153,7 @@ describe "Client places order" do
       expect(page).to have_content "Código do pedido: #{Order.last.code}"
       expect(page).to have_content "Status: Pendente"
     end
+  end
 
   it 'and sees all orders' do
     first_buffet, second_buffet, first_event, second_event = create_buffets_with_events
@@ -174,5 +175,5 @@ describe "Client places order" do
     expect(page).to have_content "CODIGO12"
     expect(page).to have_content 1.month.from_now.next_weekday.strftime('%d/%m/%Y')
   end
-  end
 end
+

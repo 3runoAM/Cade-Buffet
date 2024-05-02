@@ -19,6 +19,12 @@ class Buffet < ApplicationRecord
   validate :at_least_one_payment_method
   validate :valid_crn
 
+  def buffet_payment_method_options
+    self.buffet_payment_methods.map do |buffet_payment_method|
+      [buffet_payment_method.payment_method.id, buffet_payment_method.payment_method.name]
+    end
+  end
+
   private
 
   def at_least_one_payment_method

@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   belongs_to :event
   belongs_to :user
   enum status: { pending: 0, confirmed: 1, approved: 2, rejected: 3 }
+  enum adjustment_type: { nonexistent: 0, discount: 1, surcharge: 2 }
   before_validation :generate_code, on: :create
   before_validation :set_address_if_blank
   before_validation :set_price
@@ -11,6 +12,8 @@ class Order < ApplicationRecord
   validates :code, presence: true
   validates :address, presence: true
   validates :price, presence: true
+  validates :payment_method_id, presence: true, if: :approved?
+  validates :confirmation_date, presence: true, if: :approved?
   validate :event_date_cannot_be_in_the_past
   validate :total_guests_must_be_within_event_limits
 
@@ -46,10 +49,31 @@ class Order < ApplicationRecord
     Order.where("id != ? AND event_date = ? AND buffet_id = ? AND status != ?", id, event_date, buffet_id, "rejected").any?
   end
 
+  def self.adjustment_type_options
+    adjustment_types.keys.map do |adjustment|
+      [adjustment, I18n.t("activerecord.attributes.order.adjustment_types.#{adjustment}")]
+    end
+  end
+
+  def self.approved?
+    self.status.approved?
+  end
+
   private
 
   def calculate(event_prices)
     standard_price = event_prices.standard_price
     standard_price += (total_guests - event.min_guests) * event_prices.extra_guest_price
+    apply_adjustments(standard_price)
+  end
+
+  def apply_adjustments(standard_price)
+    case self.adjustment_type
+    when 'discount'
+      return standard_price - self.adjustment
+    when 'surcharge'
+      return standard_price + self.adjustment
+    end
+    standard_price
   end
 end

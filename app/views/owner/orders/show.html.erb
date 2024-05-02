@@ -28,3 +28,10 @@
   <dt><%= Order.human_attribute_name :status %>:</dt>
   <dd><%= I18n.t("activerecord.attributes.order.statuses.#{@order.status}")%></dd>
 </dl>
+
+<% if @order.status == 'pending' %>
+  <div>
+    <%= link_to 'Analisar solicitação',edit_owner_order_path(@order.id) %>
+    <%= button_to 'Rejeitar solicitação', owner_order_path(@order, order: { status: :rejected }), method: :patch %>
+  </div>
+<% end %>

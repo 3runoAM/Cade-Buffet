@@ -68,7 +68,7 @@
     </div>
     <br/>
 
-    <%= order.hidden_field :status, value: :confirmed %>
+    <%= order.hidden_field :status, value: :approved %>
 
     <%= order.submit 'Aprovar', data: {turbo: false}%>
   <% end %>

@@ -82,6 +82,7 @@ describe "Client places order" do
 
       expect(current_path).to eq client_order_path(Order.last.id)
       expect(page).to have_content "Evento solicitado com sucesso"
+      expect(page).to have_content "Pedido #{Order.last.code}"
       expect(page).to have_content "Buffet: Buffet 1"
       expect(page).to have_content "Evento: Event 1"
       expect(page).to have_content "Data do evento: #{1.month.from_now.next_weekday.strftime('%d/%m/%Y')}"
@@ -89,7 +90,6 @@ describe "Client places order" do
       expect(page).to have_content "Endereço: Rua 1, Bairro 1, 1"
       expect(page).to have_content "Informações adicionais: Informações adicionais do pedido 1 para o evento 1 em Buffet 1 em 1 mês"
       expect(page).to have_content "Preço: R$ 5.000,00"
-      expect(page).to have_content "Código do pedido: #{Order.last.code}"
       expect(page).to have_content "Status: Pendente"
     end
 
@@ -113,6 +113,7 @@ describe "Client places order" do
 
       expect(current_path).to eq client_order_path(Order.last)
       expect(page).to have_content "Evento solicitado com sucesso"
+      expect(page).to have_content "Pedido #{Order.last.code}"
       expect(page).to have_content "Buffet: Buffet 1"
       expect(page).to have_content "Evento: Event 1"
       expect(page).to have_content "Data do evento: #{1.month.from_now.next_weekday.strftime('%d/%m/%Y')}"
@@ -120,7 +121,6 @@ describe "Client places order" do
       expect(page).to have_content "Endereço: #{first_buffet.address.full_address}"
       expect(page).to have_content "Informações adicionais: Informações adicionais do pedido 1 para o evento 1 em Buffet 1 em 1 mês"
       expect(page).to have_content "Preço: R$ 5.000,00"
-      expect(page).to have_content "Código do pedido: #{Order.last.code}"
       expect(page).to have_content "Status: Pendente"
     end
 
@@ -143,6 +143,7 @@ describe "Client places order" do
 
       expect(current_path).to eq client_order_path(Order.last)
       expect(page).to have_content "Evento solicitado com sucesso"
+      expect(page).to have_content "Pedido #{Order.last.code}"
       expect(page).to have_content "Buffet: Buffet 2"
       expect(page).to have_content "Evento: Event 2"
       expect(page).to have_content "Data do evento: #{1.month.from_now.next_weekday.strftime('%d/%m/%Y')}"
@@ -150,7 +151,6 @@ describe "Client places order" do
       expect(page).to have_content "Endereço: #{second_buffet.address.full_address}"
       expect(page).to have_content "Informações adicionais: Informações adicionais do pedido 1 para o evento 2 em Buffet 2 em 1 mês"
       expect(page).to have_content "Preço: R$ 10.000,00"
-      expect(page).to have_content "Código do pedido: #{Order.last.code}"
       expect(page).to have_content "Status: Pendente"
     end
   end

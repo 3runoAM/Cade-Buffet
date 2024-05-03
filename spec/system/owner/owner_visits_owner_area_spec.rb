@@ -308,7 +308,7 @@ describe "Owner visits owner area" do
     end
 
     it 'and sees the buttons to reject or analyze an order' do
-      owner = create_buffet_with_pending_orders
+      owner, client = create_buffet_with_pending_orders
 
       login_as owner
       visit root_path
@@ -321,7 +321,7 @@ describe "Owner visits owner area" do
     end
 
     it 'and can reject an order' do
-      owner = create_buffet_with_pending_orders
+      owner, client = create_buffet_with_pending_orders
 
       login_as owner
       visit root_path
@@ -336,7 +336,7 @@ describe "Owner visits owner area" do
 
   context "analyzes an order" do
     it 'and the form has all the fields to do so' do
-      owner = create_buffet_with_pending_orders
+      owner, client = create_buffet_with_pending_orders
 
       login_as owner
       visit root_path
@@ -368,7 +368,7 @@ describe "Owner visits owner area" do
     end
 
     it 'and approves it without price adjustments' do
-      owner = create_buffet_with_pending_orders
+      owner, client = create_buffet_with_pending_orders
 
       login_as owner
       visit root_path
@@ -386,7 +386,7 @@ describe "Owner visits owner area" do
     end
 
     it 'and approves it with discount adjustments' do
-      owner = create_buffet_with_pending_orders
+      owner, client = create_buffet_with_pending_orders
 
       login_as owner
       visit root_path
@@ -408,7 +408,7 @@ describe "Owner visits owner area" do
     end
 
     it 'and approves it with surcharge adjustments' do
-      owner = create_buffet_with_pending_orders
+      owner, client = create_buffet_with_pending_orders
 
       login_as owner
       visit root_path

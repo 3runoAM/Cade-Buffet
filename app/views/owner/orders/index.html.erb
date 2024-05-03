@@ -2,20 +2,20 @@
 
 <div id='pending-orders'>
   <h2>Eventos pendentes</h2>
-  <%= render partial: 'shared/show_orders', locals: {orders_list: @pending_orders} %>
+  <%= render partial: 'shared/owner_show_orders', locals: {orders_list: @pending_orders} %>
 </div>
 
 <div id='confirmed-orders'>
   <h2>Eventos confirmados</h2>
-  <%= render partial: 'shared/show_orders', locals: {orders_list: @confirmed_orders} %>
+  <%= render partial: 'shared/owner_show_orders', locals: {orders_list: @confirmed_orders} %>
 </div>
 
 <div id='approved-orders'>
   <h2>Eventos aprovados</h2>
-  <%= render partial: 'shared/show_orders', locals: {orders_list: @approved_orders} %>
+  <%= render partial: 'shared/owner_show_orders', locals: {orders_list: @approved_orders} %>
 </div>
 
 <div id='rejected-orders'>
   <h2>Eventos rejeitados</h2>
-  <%= render partial: 'shared/show_orders', locals: {orders_list: @rejected_orders} %>
+  <%= render partial: 'shared/owner_show_orders', locals: {orders_list: @rejected_orders} %>
 </div>

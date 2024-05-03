@@ -1,0 +1,10 @@
+<% if orders_list.empty? %>
+  <p>Nenhum pedido cadastrado.</p>
+<% else %>
+  <% orders_list.each do |order| %>
+    <dl>
+      <dt><%= link_to order.code, client_order_path(order.id) %></dt>
+      <dd><%= order.event_date.strftime('%d/%m/%Y') %></dd>
+    </dl>
+  <% end %>
+<% end %>

@@ -1,12 +1,21 @@
 <h1>Meus pedidos</h1>
 
-<% if @orders.empty? %>
-    <p>Nenhum pedido cadastrado.</p>
-<% else %>
-  <% @orders.each do |order| %>
-    <dl>
-      <dt><%= link_to order.code, @order %></dt>
-      <dd><%= order.event_date.strftime('%d/%m/%Y') %></dd>
-    </dl>
-  <% end %>
-<% end %>
+<div id='pending-orders'>
+  <h2>Eventos pendentes</h2>
+  <%= render partial: 'shared/client_show_orders', locals: {orders_list: @pending_orders} %>
+</div>
+
+<div id='confirmed-orders'>
+  <h2>Eventos confirmados</h2>
+  <%= render partial: 'shared/client_show_orders', locals: {orders_list: @confirmed_orders} %>
+</div>
+
+<div id='approved-orders'>
+  <h2>Eventos aprovados</h2>
+  <%= render partial: 'shared/client_show_orders', locals: {orders_list: @approved_orders} %>
+</div>
+
+<div id='rejected-orders'>
+  <h2>Eventos rejeitados</h2>
+  <%= render partial: 'shared/client_show_orders', locals: {orders_list: @rejected_orders} %>
+</div>

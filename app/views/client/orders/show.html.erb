@@ -1,29 +1,60 @@
-<h1><%= Order.model_name.human %></h1>
+<h1><%= Order.model_name.human %> <%= @order.code %></h1>
 <dl>
   <dt><%= Order.human_attribute_name :buffet_id %>:</dt>
   <dd><%= @order.buffet.brand_name %></dd>
+  <br/>
 
   <dt><%= Order.human_attribute_name :event_id %>:</dt>
   <dd><%= @order.event.name %></dd>
+  <br/>
 
   <dt><%= Order.human_attribute_name :event_date %>:</dt>
   <dd><%= @order.event_date.strftime("%d/%m/%Y") %></dd>
+  <br/>
 
   <dt><%= Order.human_attribute_name :total_guests %>:</dt>
   <dd><%= @order.total_guests %></dd>
+  <br/>
 
   <dt><%= Order.human_attribute_name :address %>:</dt>
   <dd><%= @order.address %></dd>
+  <br/>
 
   <dt><%= Order.human_attribute_name :additional_info %>:</dt>
   <dd><%= @order.additional_info %></dd>
+  <br/>
 
   <dt><%= Order.human_attribute_name :price %>:</dt>
   <dd><%= number_to_currency(@order.price) %></dd>
-
-  <dt><%= Order.human_attribute_name :code %>:</dt>
-  <dd><%= @order.code %></dd>
+  <br/>
 
   <dt><%= Order.human_attribute_name :status %>:</dt>
   <dd><%= I18n.t("activerecord.attributes.order.statuses.#{@order.status}")%></dd>
+  <br/>
 </dl>
+
+<% if @order.status == "approved" && @order.status == "confirmed" %>
+  <h2>Resposta do Buffet</h2>
+  <dt><%= Order.human_attribute_name :adjustment %>:</dt>
+  <dd><%= number_to_currency(@order.adjustment) %></dd>
+  <br/>
+
+  <dt><%= Order.human_attribute_name :adjustment_type %>:</dt>
+  <dd><%= I18n.t("activerecord.attributes.order.adjustment_types.#{@order.adjustment_type}") %></dd>
+  <br/>
+
+  <dt><%= Order.human_attribute_name :adjustment_description %>:</dt>
+  <dd><%= @order.adjustment_description %></dd>
+  <br/>
+
+  <dt><%= Order.human_attribute_name :payment_method_id %>:</dt>
+  <dd><%= @order.payment_method.name %></dd>
+  <br/>
+
+  <dt><%= Order.human_attribute_name :confirmation_date %>:</dt>
+  <dd><%= @order.confirmation_date.strftime("%d/%m/%Y") %></dd>
+<% end %>
+<br/>
+
+<%= render_confirm_button(@order) %>
+<%= render_reject_order_button(@order) %>

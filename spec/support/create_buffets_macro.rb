@@ -112,5 +112,5 @@ def create_buffet_with_pending_orders
                 additional_info: "Informações adicionais do pedido 4 para o evento 1 em Buffet 1",
                 status: :pending)
 
-  owner
+  [owner, client]
 end

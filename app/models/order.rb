@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   belongs_to :buffet
   belongs_to :event
   belongs_to :user
+  belongs_to :payment_method, optional: true
   enum status: { pending: 0, confirmed: 1, approved: 2, rejected: 3 }
   enum adjustment_type: { nonexistent: 0, discount: 1, surcharge: 2 }
   before_validation :generate_code, on: :create
@@ -12,8 +13,9 @@ class Order < ApplicationRecord
   validates :code, presence: true
   validates :address, presence: true
   validates :price, presence: true
-  validates :payment_method_id, presence: true, if: :approved?
+  validates :payment_method, presence: true, if: :approved?
   validates :confirmation_date, presence: true, if: :approved?
+  validate :confirmation_date_cannot_be_in_the_past, if: :approved?
   validate :event_date_cannot_be_in_the_past
   validate :total_guests_must_be_within_event_limits
 
@@ -39,6 +41,12 @@ class Order < ApplicationRecord
     end
   end
 
+  def confirmation_date_cannot_be_in_the_past
+    if confirmation_date < Date.today
+      errors.add(:confirmation_date, 'não pode ser no passado')
+    end
+  end
+
   def total_guests_must_be_within_event_limits
     if self.total_guests < event.min_guests || self.total_guests > event.max_guests
       errors.add(:total_guests, "deve ser entre #{event.min_guests} e #{event.max_guests}")
@@ -56,7 +64,7 @@ class Order < ApplicationRecord
   end
 
   def self.approved?
-    self.status.approved?
+    status == 'approved'
   end
 
   private

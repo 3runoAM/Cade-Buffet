@@ -56,5 +56,7 @@
 <% end %>
 <br/>
 
+<%= link_to 'Falar com o estabelecimento', messages_path(order_id: @order.id) %>
+
 <%= render_confirm_button(@order) %>
 <%= render_reject_order_button(@order) %>

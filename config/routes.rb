@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: "home#index"
   resources :home, only: [:show]
   devise_for :users
+  resources :messages, only: [:index, :create]
   namespace :owner do
     resources :buffets, only: [:new, :create, :show, :edit, :update] do
       resources :events, only: [:new, :create, :show, :edit, :update]

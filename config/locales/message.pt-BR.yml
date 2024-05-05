@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      message:
+        one: "Mensagem"
+        other: "Mensagens"
+    attributes:
+      message:
+        user_id: "Usuário"
+        order_id: "Solicitação"
+        sent_at: "Enviado em"
+        content: "Mensagem"

@@ -8,6 +8,8 @@ class Order < ApplicationRecord
   before_validation :generate_code, on: :create
   before_validation :set_address_if_blank
   before_validation :set_price
+  validates :status, inclusion: { in: statuses.keys }
+  validates :adjustment_type, inclusion: { in: adjustment_types.keys }
   validates :event_date, presence: true
   validates :total_guests, presence: true
   validates :code, presence: true
@@ -48,10 +50,12 @@ class Order < ApplicationRecord
   end
 
   def total_guests_must_be_within_event_limits
-    if self.total_guests < event.min_guests || self.total_guests > event.max_guests
+    if self.total_guests <= 0 || self.total_guests > event.max_guests
       errors.add(:total_guests, "deve ser entre #{event.min_guests} e #{event.max_guests}")
     end
   end
+
+
 
   def has_same_day_order?
     Order.where("id != ? AND event_date = ? AND buffet_id = ? AND status != ?", id, event_date, buffet_id, "rejected").any?

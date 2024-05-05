@@ -1,0 +1,18 @@
+<%= form_with model: @message do |message| %>
+  <div>
+    <%= message.label :content %><br/>
+    <%= message.text_area :content %>
+  </div>
+  <%= message.hidden_field :order_id, value: @order.id %>
+
+  <%= message.submit "Enviar" %>
+<% end %>
+
+<% @messages.each do |message| %>
+  <div>
+    <%= message.user.name %>
+    <%= message.content %>
+    <p><%= Message.human_attribute_name :sent_at %>: <%= message.sent_at.strftime("%d/%m/%Y %H:%M")%></p>
+  </div>
+  <br/>
+<% end %>

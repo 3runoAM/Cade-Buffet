@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :buffets, only: [:index] do
+      resources :buffets, only: [:index, :show] do
         get 'search/:query', on: :collection, to: "buffets#search"
         get 'events', on: :member, to: "buffets#events"
       end

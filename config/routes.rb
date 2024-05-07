@@ -19,4 +19,12 @@ Rails.application.routes.draw do
     resources :orders, only: [:new, :create, :show, :update]
     resources :dashboards, only: [:index]
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :buffets, only: [:index] do
+        get 'search/:query', on: :collection, to: "buffets#search"
+      end
+    end
+  end
 end

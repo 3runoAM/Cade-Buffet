@@ -39,26 +39,25 @@ class Order < ApplicationRecord
 
   def event_date_cannot_be_in_the_past
     if event_date < Date.today
-      errors.add(:event_date, 'não pode ser no passado')
+      errors.add(:event_date, 'não pode estar no passado')
     end
   end
 
   def confirmation_date_cannot_be_in_the_past
     if confirmation_date < Date.today
-      errors.add(:confirmation_date, 'não pode ser no passado')
+      errors.add(:confirmation_date, 'não pode estar no passado')
     end
   end
 
   def total_guests_must_be_within_event_limits
     if self.total_guests <= 0 || self.total_guests > event.max_guests
-      errors.add(:total_guests, "deve ser entre #{event.min_guests} e #{event.max_guests}")
+      errors.add(:total_guests, "deve estar entre 1 e #{event.max_guests}")
     end
   end
 
-
-
   def has_same_day_order?
-    Order.where("id != ? AND event_date = ? AND buffet_id = ? AND status != ?", id, event_date, buffet_id, "rejected").any?
+    Order.where("id != ? AND event_date = ? AND buffet_id = ? AND status != ? OR status != ?",
+                id, event_date, buffet_id, "rejected", "pending").any?
   end
 
   def self.adjustment_type_options

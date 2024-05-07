@@ -181,7 +181,7 @@ RSpec.describe "Buffets", type: :request do
       end
     end
 
-    context 'GET /api/v1/buffets/1/events' do
+    context 'GET /api/v1/buffets/:id/events' do
       it 'successfully' do
         payment_method_a = PaymentMethod.create!(name: 'Payment Method 1')
         payment_method_b = PaymentMethod.create!(name: 'Payment Method 2')
@@ -348,6 +348,189 @@ RSpec.describe "Buffets", type: :request do
         expect(response.body).not_to include 'email'
         expect(response.body).not_to include 'user_id'
         expect(response.body).not_to include 'address'
+      end
+    end
+
+    context "GET /api/v1/buffets/:buffets_id/:event_id/:event_date/:total_guests" do
+      it 'successfully' do
+        payment_method_a = PaymentMethod.create!(name: 'Payment Method 1')
+        payment_method_b = PaymentMethod.create!(name: 'Payment Method 2')
+        owner = User.create!(name: 'Fabrício', email: 'email_first_owner@example.com',
+                             password: 'password1', role: :owner)
+        buffet = Buffet.new(user: owner, brand_name: 'Buffet 1', company_name: 'Company 1',
+                            crn: '23.261.499/0001-96', phone: '111-111-1111', email: 'buffet1@example.com',
+                            description: 'Description 1')
+        buffet.payment_methods << payment_method_a
+        buffet.payment_methods << payment_method_b
+        buffet.save!
+        Address.create!(street_name: 'Street 1', neighborhood: 'Neighborhood 1', house_or_lot_number: '1',
+                        state: 'State 1', city: 'City 1', zip: '11111', buffet: buffet)
+
+        first_event = Event.create!(name: 'Event 1', description: 'Description 1', buffet: buffet,
+                                    min_guests: 10, max_guests: 100, standard_duration: 300, menu: 'Menu 1',
+                                    offsite_event: true, offers_alcohol: true, offers_decoration: true,
+                                    offers_valet_parking: true)
+        EventPrice.create!(event: first_event, standard_price: 1000, extra_guest_price: 100,
+                           extra_hour_price: 50, day_type: :weekday)
+        EventPrice.create!(event: first_event, standard_price: 1500, extra_guest_price: 150,
+                           extra_hour_price: 75, day_type: :weekend)
+        second_event = Event.create!(name: 'Event 2', description: 'Description 2', buffet: buffet,
+                                     min_guests: 10, max_guests: 100, standard_duration: 600, menu: 'Menu 2',
+                                     offsite_event: false, offers_alcohol: true, offers_decoration: true,
+                                     offers_valet_parking: true)
+        EventPrice.create!(event: second_event, standard_price: 2000, extra_guest_price: 200,
+                           extra_hour_price: 100, day_type: :weekday)
+        EventPrice.create!(event: second_event, standard_price: 2500, extra_guest_price: 250,
+                           extra_hour_price: 125, day_type: :weekend)
+
+
+        get "/api/v1/buffets/1/1/#{7.days.from_now.next_weekday.to_date}/100"
+
+        expect(response).to have_http_status 200
+        json_response = JSON.parse(response.body)
+
+        expect(json_response['price']).to eq 10_000
+      end
+
+      describe 'return 404' do
+        it "if buffet doesn't exist" do
+          get "/api/v1/buffets/1235/1/#{7.days.from_now.next_weekday.to_date}/100"
+
+          expect(response).to have_http_status 404
+        end
+
+        it "if event type doesn't exist" do
+          get "/api/v1/buffets/1/12345/#{7.days.from_now.next_weekday.to_date}/100"
+
+          expect(response).to have_http_status 404
+        end
+      end
+
+      describe "return an error message if unavailable" do
+        it "because of same date event" do
+          owner = User.create!(name: 'Fabrício', email: 'owner@example.com', password: 'password1', role: :owner)
+          payment_method_a = PaymentMethod.create!(name: 'Pix')
+          payment_method_b = PaymentMethod.create!(name: 'Cartão de crédito')
+          buffet = Buffet.new(user_id: owner.id, brand_name: 'Buffet 1', company_name: 'Company 1',
+                              crn: '23.261.499/0001-96', phone: '111-111-1111', email: 'buffet1@example.com',
+                              description: 'Description 1')
+          buffet.payment_methods << payment_method_a
+          buffet.payment_methods << payment_method_b
+          buffet.save!
+          Address.create!(street_name: 'Street 1', neighborhood: 'Neighborhood 1', house_or_lot_number: '1',
+                          state: 'State 1', city: 'City 1', zip: '11111', buffet_id: buffet.id)
+          event = Event.create!(name: 'Event 1', description: 'Description 1', buffet: buffet,
+                                min_guests: 10, max_guests: 100, standard_duration: 300, menu: 'Menu 1',
+                                offsite_event: true, offers_alcohol: true, offers_decoration: true,
+                                offers_valet_parking: true)
+          EventPrice.create!(event: event, standard_price: 1000, extra_guest_price: 100,
+                             extra_hour_price: 50, day_type: :weekday)
+          EventPrice.create!(event: event, standard_price: 1500, extra_guest_price: 150,
+                             extra_hour_price: 75, day_type: :weekend)
+          client = User.create!(email: 'first_client@client.com', password: 'password', name: "Client ONE",
+                                role: :client, cpf: "068.302.130-37")
+          allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('CODIGO01')
+          Order.create!(user_id: client.id, event: event, buffet: buffet, total_guests: 50,
+                        address: "Rua 1, Bairro 1, 1", event_date: 1.month.from_now.next_weekday, price: 5000,
+                        additional_info: "Informações adicionais do pedido 1 para o evento 1 em Buffet 1",
+                        status: :confirmed, confirmation_date: 2.days.from_now, payment_method: payment_method_a)
+
+          get "/api/v1/buffets/1/1/#{1.month.from_now.next_weekday.to_date}/100"
+
+          expect(response).to have_http_status 200
+          json_response = JSON.parse(response.body)
+          expect(json_response).to include 'error'
+          expect(json_response['error']).to eq "Data indisponível"
+        end
+
+        it "because total guests is greater than maximum guests" do
+          owner = User.create!(name: 'Fabrício', email: 'owner@example.com', password: 'password1', role: :owner)
+          payment_method_a = PaymentMethod.create!(name: 'Pix')
+          payment_method_b = PaymentMethod.create!(name: 'Cartão de crédito')
+          buffet = Buffet.new(user_id: owner.id, brand_name: 'Buffet 1', company_name: 'Company 1',
+                              crn: '23.261.499/0001-96', phone: '111-111-1111', email: 'buffet1@example.com',
+                              description: 'Description 1')
+          buffet.payment_methods << payment_method_a
+          buffet.payment_methods << payment_method_b
+          buffet.save!
+          Address.create!(street_name: 'Street 1', neighborhood: 'Neighborhood 1', house_or_lot_number: '1',
+                          state: 'State 1', city: 'City 1', zip: '11111', buffet_id: buffet.id)
+          event = Event.create!(name: 'Event 1', description: 'Description 1', buffet: buffet,
+                                min_guests: 10, max_guests: 100, standard_duration: 300, menu: 'Menu 1',
+                                offsite_event: true, offers_alcohol: true, offers_decoration: true,
+                                offers_valet_parking: true)
+          EventPrice.create!(event: event, standard_price: 1000, extra_guest_price: 100,
+                             extra_hour_price: 50, day_type: :weekday)
+          EventPrice.create!(event: event, standard_price: 1500, extra_guest_price: 150,
+                             extra_hour_price: 75, day_type: :weekend)
+
+          get "/api/v1/buffets/1/1/#{7.days.from_now.next_weekday.to_date}/200"
+
+          expect(response).to have_http_status 412
+          json_response = JSON.parse(response.body)
+          expect(json_response).to include 'error'
+          expect(json_response['error'][0]).to eq "Número de convidados deve estar entre 1 e #{event.max_guests}"
+        end
+
+        context "because event date" do
+          it 'is in the past' do
+            owner = User.create!(name: 'Fabrício', email: 'owner@example.com', password: 'password1', role: :owner)
+            payment_method_a = PaymentMethod.create!(name: 'Pix')
+            payment_method_b = PaymentMethod.create!(name: 'Cartão de crédito')
+            buffet = Buffet.new(user_id: owner.id, brand_name: 'Buffet 1', company_name: 'Company 1',
+                                crn: '23.261.499/0001-96', phone: '111-111-1111', email: 'buffet1@example.com',
+                                description: 'Description 1')
+            buffet.payment_methods << payment_method_a
+            buffet.payment_methods << payment_method_b
+            buffet.save!
+            Address.create!(street_name: 'Street 1', neighborhood: 'Neighborhood 1', house_or_lot_number: '1',
+                            state: 'State 1', city: 'City 1', zip: '11111', buffet_id: buffet.id)
+            event = Event.create!(name: 'Event 1', description: 'Description 1', buffet: buffet,
+                                  min_guests: 10, max_guests: 100, standard_duration: 300, menu: 'Menu 1',
+                                  offsite_event: true, offers_alcohol: true, offers_decoration: true,
+                                  offers_valet_parking: true)
+            EventPrice.create!(event: event, standard_price: 1000, extra_guest_price: 100,
+                               extra_hour_price: 50, day_type: :weekday)
+            EventPrice.create!(event: event, standard_price: 1500, extra_guest_price: 150,
+                               extra_hour_price: 75, day_type: :weekend)
+
+            get "/api/v1/buffets/1/1/1999-12-21/100"
+
+            expect(response).to have_http_status 412
+            json_response = JSON.parse(response.body)
+            expect(json_response).to include 'error'
+            expect(json_response['error'][0]).to eq "Data do evento não pode estar no passado"
+          end
+
+          it 'is invalid' do
+            owner = User.create!(name: 'Fabrício', email: 'owner@example.com', password: 'password1', role: :owner)
+            payment_method_a = PaymentMethod.create!(name: 'Pix')
+            payment_method_b = PaymentMethod.create!(name: 'Cartão de crédito')
+            buffet = Buffet.new(user_id: owner.id, brand_name: 'Buffet 1', company_name: 'Company 1',
+                                crn: '23.261.499/0001-96', phone: '111-111-1111', email: 'buffet1@example.com',
+                                description: 'Description 1')
+            buffet.payment_methods << payment_method_a
+            buffet.payment_methods << payment_method_b
+            buffet.save!
+            Address.create!(street_name: 'Street 1', neighborhood: 'Neighborhood 1', house_or_lot_number: '1',
+                            state: 'State 1', city: 'City 1', zip: '11111', buffet_id: buffet.id)
+            event = Event.create!(name: 'Event 1', description: 'Description 1', buffet: buffet,
+                                  min_guests: 10, max_guests: 100, standard_duration: 300, menu: 'Menu 1',
+                                  offsite_event: true, offers_alcohol: true, offers_decoration: true,
+                                  offers_valet_parking: true)
+            EventPrice.create!(event: event, standard_price: 1000, extra_guest_price: 100,
+                               extra_hour_price: 50, day_type: :weekday)
+            EventPrice.create!(event: event, standard_price: 1500, extra_guest_price: 150,
+                               extra_hour_price: 75, day_type: :weekend)
+
+            get "/api/v1/buffets/1/1/2124-50-693/100"
+
+            expect(response).to have_http_status 412
+            json_response = JSON.parse(response.body)
+            expect(json_response).to include 'error'
+            expect(json_response['error']).to eq "Dados inválidos"
+          end
+        end
       end
     end
   end

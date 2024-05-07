@@ -67,7 +67,7 @@ RSpec.describe "Buffets", type: :request do
     end
   end
 
-  context "Search for buffets" do
+  context "User search for buffets" do
     it 'and return all of them' do
       payment_method_a = PaymentMethod.create!(name: 'Payment Method 1')
       payment_method_b = PaymentMethod.create!(name: 'Payment Method 2')
@@ -116,8 +116,52 @@ RSpec.describe "Buffets", type: :request do
       expect(json_response).not_to include 'updates_at'
     end
 
-    # it 'with a name' do
-    #
-    # end
+    it "and there's no buffets registered" do
+      get '/api/v1/buffets'
+
+      expect(response).to have_http_status 200
+      expect(response.content_type).to include 'application/json'
+      expect(response.body).to eq "[]"
+    end
+
+    it 'with a argument' do
+      first_owner = User.create!(name: 'Fabrício', email: 'email_first_owner@example.com', password: 'password1', role: :owner)
+      second_owner = User.create!(name: 'Carlos', email: 'email_second_owner@example.com', password: 'password2', role: :owner)
+
+      payment_method_a = PaymentMethod.create!(name: 'Payment Method 1')
+      payment_method_b = PaymentMethod.create!(name: 'Payment Method 2')
+
+      first_buffet = Buffet.new(user_id: first_owner.id, brand_name: 'Buffet STAR', company_name: 'Company STAR',
+                                crn: '94.985.368/0001-08', phone: '111-111-1111', email: 'buffetSTAR@example.com',
+                                description: 'Description STAR')
+      first_buffet.payment_methods << payment_method_a
+      first_buffet.payment_methods << payment_method_b
+      first_buffet.save!
+
+      second_buffet = Buffet.new(user_id: second_owner.id, brand_name: 'Buffet MOON', company_name: 'Company MOON',
+                                 crn: '59.182.557/0001-33', phone: '222-222-2222', email: 'buffetMOON@example.com',
+                                 description: 'Description MOON')
+      second_buffet.payment_methods << payment_method_b
+      second_buffet.save!
+
+      Address.create!(street_name: 'Street 1', neighborhood: 'Neighborhood 1', house_or_lot_number: '1',
+                      state: 'State 1', city: 'City 1', zip: '11111', buffet_id: first_buffet.id)
+      Address.create!(street_name: 'Street 2', neighborhood: 'Neighborhood 2', house_or_lot_number: '2',
+                      state: 'State 2', city: 'City 2', zip: '22222', buffet_id: second_buffet.id)
+
+      get "/api/v1/buffets/search/star"
+
+      expect(response).to have_http_status 200
+      # expect(response.content_type).to eq 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response[0]['brand_name']).to eq 'Buffet STAR'
+      expect(json_response[0]['description']).to eq 'Description STAR'
+      expect(json_response[0]['company_name']).to eq 'Company STAR'
+      expect(json_response[0]['phone']).to eq '111-111-1111'
+      expect(json_response[0]['email']).to eq 'buffetSTAR@example.com'
+    end
   end
+
+  # context "User sees all events info" do
+  # end
 end

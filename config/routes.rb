@@ -22,8 +22,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :buffets, only: [:index]
+      resources :buffets, only: [:index] do
+        get 'search/:query', on: :collection, to: "buffets#search"
+      end
     end
   end
-
 end

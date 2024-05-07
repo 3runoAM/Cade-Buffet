@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :buffets, only: [:index] do
         get 'search/:query', on: :collection, to: "buffets#search"
+        get 'events', on: :member, to: "buffets#events"
       end
     end
   end

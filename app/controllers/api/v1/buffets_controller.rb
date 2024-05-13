@@ -55,7 +55,7 @@ class Api::V1::BuffetsController < ActionController::API
   end
 
   def render_412
-    render status: 412, json: { error: "Dados inválidos" }
+    render status: 412, json: { error: "Data inválida" }
   end
 
   def remove_created_and_updated(buffet)

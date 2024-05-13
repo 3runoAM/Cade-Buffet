@@ -118,18 +118,44 @@ describe 'Unauthenticated user visits root_path' do
   end
 
   it 'and finds a buffet by name' do
-    create_buffets
+    payment_method_a = PaymentMethod.create!(name: 'Payment Method 1')
+    payment_method_b = PaymentMethod.create!(name: 'Payment Method 2')
+    first_owner = User.create!(name: 'Fabrício', email: 'email_first_owner@example.com',
+                               password: 'password1', role: :owner)
+    first_buffet = Buffet.new(user: first_owner, brand_name: 'Buffet A', company_name: 'Company A',
+                              crn: '23.261.499/0001-96', phone: '111-111-1111', email: 'buffet1@example.com',
+                              description: 'Description A')
+    first_buffet.payment_methods << payment_method_a
+    first_buffet.payment_methods << payment_method_b
+    first_buffet.save!
+    Address.create!(street_name: 'Street 1', neighborhood: 'Neighborhood 1', house_or_lot_number: '1',
+                    state: 'State 1', city: 'City 1', zip: '11111', buffet: first_buffet)
 
+    second_owner = User.create!(name: 'Carlos', email: 'email_second_owner@example.com',
+                                password: 'password2', role: :owner)
+    second_buffet = Buffet.new(user: second_owner, brand_name: 'Buffet B', company_name: 'Company B',
+                               crn: '66.867.496/0001-03', phone: '222-222-2222', email: 'buffet2@example.com',
+                               description: 'Description B')
+    second_buffet.payment_methods << payment_method_a
+    second_buffet.payment_methods << payment_method_b
+    second_buffet.save!
+    Address.create!(street_name: 'Street 2', neighborhood: 'Neighborhood 2', house_or_lot_number: '2',
+                    state: 'State 2', city: 'City 2', zip: '22222', buffet: second_buffet)
     visit root_path
     within "nav" do
       fill_in 'Buscar Buffet', with: 'Buffet'
       click_on 'Buscar'
     end
 
-    expect(page).to have_link 'Buffet 1'
-    expect(page).to have_content 'Localizado em: City 1 - State 1'
-    expect(page).to have_link 'Buffet 2'
-    expect(page).to have_content 'Localizado em: City 2 - State 2'
+    within "#buffets div:first-child" do
+      expect(page).to have_link 'Buffet A'
+      expect(page).to have_content 'Localizado em: City 1 - State 1'
+    end
+
+    within "#buffets div:nth-child(2)" do
+      expect(page).to have_link 'Buffet B'
+      expect(page).to have_content 'Localizado em: City 2 - State 2'
+    end
   end
   it 'and sees event details' do
     create_buffets_with_events

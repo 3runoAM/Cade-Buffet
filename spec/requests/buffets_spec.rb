@@ -351,7 +351,7 @@ RSpec.describe "Buffets", type: :request do
       end
     end
 
-    context "GET /api/v1/buffets/:buffets_id/:event_id/:event_date/:total_guests" do
+    context "GET /api/v1/buffets/:buffet_id/:event_id/:event_date/:total_guests" do
       it 'successfully' do
         payment_method_a = PaymentMethod.create!(name: 'Payment Method 1')
         payment_method_b = PaymentMethod.create!(name: 'Payment Method 2')
@@ -528,7 +528,7 @@ RSpec.describe "Buffets", type: :request do
             expect(response).to have_http_status 412
             json_response = JSON.parse(response.body)
             expect(json_response).to include 'error'
-            expect(json_response['error']).to eq "Dados inválidos"
+            expect(json_response['error']).to eq "Data inválida"
           end
         end
       end

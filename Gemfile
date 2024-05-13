@@ -43,3 +43,5 @@ gem "devise"
 gem "cpf_cnpj"
 
 gem "image_processing"
+
+gem 'rack-cors'

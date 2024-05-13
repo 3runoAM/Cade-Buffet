@@ -72,19 +72,21 @@ class Order < ApplicationRecord
 
   private
 
-  def calculate(event_prices)
-    standard_price = event_prices.standard_price
-    standard_price += (total_guests - event.min_guests) * event_prices.extra_guest_price
+  def calculate(event_price)
+    standard_price = event_price.standard_price # 9000
+    unless total_guests < event.min_guests
+      standard_price += (total_guests - event.min_guests) * event_price.extra_guest_price
+    end
     apply_adjustments(standard_price)
   end
 
-  def apply_adjustments(standard_price)
+  def apply_adjustments(temporary_price)
     case self.adjustment_type
     when 'discount'
-      return standard_price - self.adjustment
+      return temporary_price - self.adjustment
     when 'surcharge'
-      return standard_price + self.adjustment
+      return temporary_price + self.adjustment
     end
-    standard_price
+    temporary_price
   end
 end

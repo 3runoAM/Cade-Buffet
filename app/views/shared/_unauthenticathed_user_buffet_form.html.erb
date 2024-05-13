@@ -2,10 +2,12 @@
 <p>Nenhum Buffet cadastrado</p>
 <% else %>
 <h2>Buffets cadastrados:</h2>
-<dl>
-<% @buffets.each do |buffet| %>
-  <dt><%= link_to buffet.brand_name, home_path(buffet.id) %></dt>
-  <dd>Localizado em: <%= buffet.address.city %> - <%= buffet.address.state %></dd>
-<% end %>
+<dl id="buffets">
+    <% @buffets.each do |buffet| %>
+    <div>
+      <dt><%= link_to buffet.brand_name, home_path(buffet.id) %></dt>
+      <dd>Localizado em: <%= buffet.address.city %> - <%= buffet.address.state %></dd>
+    </div>
+    <% end %>
 </dl>
 <% end %>

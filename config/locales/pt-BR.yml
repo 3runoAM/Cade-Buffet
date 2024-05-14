@@ -3,6 +3,26 @@ pt-BR:
     "true": "Sim"
     "false": "Não"
   notices:
+    models:
+      message:
+        sent:
+          success: "Mensagem enviada com sucesso"
+          fail: "Problemas ao enviar mensagem"
+      order:
+        expired_date: "Data de confirmação expirada."
+        request:
+          success: "Evento solicitado com sucesso"
+          fail: "Não foi possível solicitar o evento"
+        confirmation:
+          success: "Evento confirmado com sucesso"
+          fail: "Problemas ao analisar evento"
+        approve:
+          success: "Solicitação aprovada com sucesso"
+          fail: "Problemas ao aprovar solicitação"
+      event_price:
+        register:
+          success: "Preço cadastrado com sucesso"
+          fail: "Não foi possível cadastrar o preço"
     access:
       access_denied: 'Você não tem permissão para acessar essa página'
     create:
@@ -11,3 +31,13 @@ pt-BR:
     update:
       success: "%{model_name} atualizado com sucesso"
       fail: "Problemas ao atualizar %{model_name}"
+  error:
+    invalid: "inválido"
+    models:
+      buffet:
+        at_least_one_payment_method: "deve ter no mínimo uma opção selecionada"
+      event:
+        max_guest_greater_than_min_guests: "precisa ser maior que o número mínimo de convidados"
+      order:
+        cannot_be_in_the_past: "não pode estar no passado"
+        total_guests_must_be_within_event_limits: "deve estar entre 1 e %{max_guests}"

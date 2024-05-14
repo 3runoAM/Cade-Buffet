@@ -11,9 +11,9 @@ class MessagesController < ApplicationController
     @message.user = current_user
     @message.sent_at = DateTime.now
     if @message.save
-      return redirect_to messages_path(order_id: @message.order), notice: "Mensagem enviada."
+      return redirect_to messages_path(order_id: @message.order), notice: t("notices.models.messages.success")
     end
-    flash.now[:notice] = "Problema ao enviar mensagem"
+    flash.now[:notice] = t("notices.models.messages.fail")
     redirect_to messages_path(order_id: @message.order)
   end
 end

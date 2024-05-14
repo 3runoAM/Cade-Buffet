@@ -24,6 +24,6 @@ class User < ApplicationRecord
   end
 
   def cpf_valid
-    errors.add(:cpf, "inválido") unless CPF.valid?(cpf)
+    errors.add(:cpf, I18n.t("error.invalid")) unless CPF.valid?(cpf)
   end
 end

@@ -24,10 +24,10 @@ class Owner::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     if @order.update(params.require(:order).permit(:adjustment, :adjustment_type, :adjustment_description,
                                                    :payment_method_id, :confirmation_date, :status))
-      redirect_to owner_order_path(@order), notice: "Solicitação aprovada com sucesso"
+      redirect_to owner_order_path(@order), notice: t("notices.models.order.approve.success")
     else
       @buffet = Buffet.find_by(user: current_user)
-      flash.now[:notice] = "Problemas na análise"
+      flash.now[:notice] = t("notices.models.order.approve.fail")
       render :edit
     end
   end

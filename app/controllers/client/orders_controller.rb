@@ -12,12 +12,12 @@ class  Client::OrdersController < ApplicationController
                                                      :additional_info, :buffet_id, :event_id))
     @order.user_id = current_user.id
     if @order.save
-      return redirect_to client_order_path(@order), notice: 'Evento solicitado com sucesso'
+      return redirect_to client_order_path(@order), notice: t("notices.models.order.request.success")
     end
     @buffet = Buffet.find(params[:order][:buffet_id])
     @event = @buffet.events.find(params[:order][:event_id])
-    flash.now[:notice] = 'Não foi possível solicitar o evento'
-    render :new
+    flash.now[:notice] = t("notices.models.order.request.fail")
+    render 'new'
   end
 
   def update
@@ -25,14 +25,13 @@ class  Client::OrdersController < ApplicationController
 
     if @order.confirmation_date < Date.today
       @order.rejected!
-      return redirect_to client_order_path(@order), notice: 'Data de confirmação expirada.'
+      return redirect_to client_order_path(@order), notice: t("notices.models.order.expired_date")
     end
 
     if @order.update(params.require(:order).permit(:status))
-      return redirect_to client_order_path(@order), notice: 'Evento confirmado com sucesso'
+      return redirect_to client_order_path(@order), notice: t("notices.models.order.confirmation.success")
     end
-
-    flash.now[:notice] = 'Problemas ao confirmar evento'
+    flash.now[:notice] = t("notices.models.order.confirmation.success")
     render :new
   end
 
@@ -44,6 +43,6 @@ class  Client::OrdersController < ApplicationController
 
   def check_order_owner
     @order = Order.find(params[:id])
-    redirect_to root_path, notice: "Acesso negado." if current_user.id != @order.user_id
+    redirect_to root_path, notice: t("notices.access.access_denied") if current_user.id != @order.user_id
   end
 end

@@ -7,9 +7,9 @@ class Owner::EventPricesController < ApplicationController
   def create
     @event_price = @event.event_prices.build(event_price_params)
     if @event.save
-      redirect_to owner_buffet_event_path(@event.buffet, @event), notice: 'Preço cadastrado com sucesso'
+      redirect_to owner_buffet_event_path(@event.buffet, @event), notice: t("notices.models.event_price.register.success")
     else
-      flash.now[:alert] = 'Não foi possível cadastrar o preço'
+      flash.now[:alert] =  t("notices.models.event_price.register.fail")
       render 'new'
     end
   end
@@ -21,9 +21,9 @@ class Owner::EventPricesController < ApplicationController
   def update
     @event_price = EventPrice.find params[:id]
     if @event_price.update(event_price_params)
-      redirect_to owner_buffet_event_path(@event.buffet, @event), notice: 'Preço atualizado com sucesso'
+      redirect_to owner_buffet_event_path(@event.buffet, @event), notice: t("notices.update.success", model_name: EventPrice.model_name.human)
     else
-      flash.now[:alert] = 'Não foi possível atualizar o preço'
+      flash.now[:alert] = t("notices.update.fail", model_name: EventPrice.model_name.human.downcase)
       render 'edit'
     end
   end
@@ -39,7 +39,7 @@ class Owner::EventPricesController < ApplicationController
     if event.buffet.user == current_user
       @event = event
     else
-      redirect_to owner_dashboards_path, alert: 'Você não tem permissão para acessar essa página'
+      redirect_to owner_dashboards_path, alert: t("notices.access.access_denied")
     end
   end
 end

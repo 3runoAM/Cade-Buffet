@@ -29,10 +29,10 @@ class Buffet < ApplicationRecord
   private
 
   def at_least_one_payment_method
-    errors.add(:payment_methods, "deve ter no mínimo uma opção selecionada") if payment_methods.empty?
+    errors.add(:payment_methods, I18n.t("error.models.buffet.at_least_one_payment_method")) if payment_methods.empty?
   end
 
   def valid_crn
-    errors.add(:crn, "inválido") unless CNPJ.valid?(crn)
+    errors.add(:crn, I18n.t("error.invalid")) unless CNPJ.valid?(crn)
   end
 end

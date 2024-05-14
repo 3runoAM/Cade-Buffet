@@ -39,19 +39,19 @@ class Order < ApplicationRecord
 
   def event_date_cannot_be_in_the_past
     if event_date < Date.today
-      errors.add(:event_date, 'não pode estar no passado')
+      errors.add(:event_date, I18n.t("error.models.order.cannot_be_in_the_past"))
     end
   end
 
   def confirmation_date_cannot_be_in_the_past
     if confirmation_date < Date.today
-      errors.add(:confirmation_date, 'não pode estar no passado')
+      errors.add(:confirmation_date,  I18n.t("error.models.order.cannot_be_in_the_past"))
     end
   end
 
   def total_guests_must_be_within_event_limits
     if self.total_guests <= 0 || self.total_guests > event.max_guests
-      errors.add(:total_guests, "deve estar entre 1 e #{event.max_guests}")
+      errors.add(:total_guests, I18n.t("error.models.order.total_guests_must_be_within_event_limits", max_guests: event.max_guests))
     end
   end
 

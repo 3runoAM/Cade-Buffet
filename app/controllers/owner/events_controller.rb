@@ -8,9 +8,9 @@ class Owner::EventsController < ApplicationController
     @buffet = Buffet.find params[:buffet_id]
     @event = @buffet.events.build(event_params)
     if @event.save
-      return redirect_to owner_buffet_event_path(@buffet, @event), notice: "Evento criado com sucesso"
+      return redirect_to owner_buffet_event_path(@buffet, @event), notice: t("notices.create.success", model_name: Event.model_name.human)
     end
-    flash.now[:notice] = "Problema ao criar evento"
+    flash.now[:notice] = t("notices.create.fail", model_name: Event.model_name.human.downcase)
     render 'new'
   end
 
@@ -28,9 +28,9 @@ class Owner::EventsController < ApplicationController
     @buffet = Buffet.find params[:buffet_id]
     @event = Event.find params[:id]
     if @event.update(event_params)
-      return redirect_to owner_buffet_event_path(@buffet, @event), notice: "Evento atualizado com sucesso"
+      return redirect_to owner_buffet_event_path(@buffet, @event), notice: t("notices.update.success", model_name: Event.model_name.human)
     end
-    flash.now[:notice] = "Problema ao atualizar evento"
+    flash.now[:notice] = t("notices.update.success", model_name: Event.model_name.human.downcase)
     render 'edit'
   end
 

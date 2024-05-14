@@ -44,7 +44,7 @@ class Event < ApplicationRecord
 
   def max_guest_greater_than_min_guests
     if min_guests >= max_guests
-      errors.add(:max_guests, 'precisa ser maior que o número mínimo de convidados')
+      errors.add(:max_guests, I18n.t("error.models.event.max_guest_greater_than_min_guests"))
     end
   end
 end

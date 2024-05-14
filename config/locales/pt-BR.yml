@@ -2,3 +2,12 @@ pt-BR:
   boolean:
     "true": "Sim"
     "false": "Não"
+  notices:
+    access:
+      access_denied: 'Você não tem permissão para acessar essa página'
+    create:
+      success: "%{model_name} criado com sucesso"
+      fail: "Problemas ao criar %{model_name}"
+    update:
+      success: "%{model_name} atualizado com sucesso"
+      fail: "Problemas ao atualizar %{model_name}"

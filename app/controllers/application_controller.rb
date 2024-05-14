@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_locale
+
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
 
   protected
 
@@ -21,14 +26,14 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_owner
-    unless current_user || current_user.role == 'owner'
-      redirect_to root_path, notice: 'Você não tem permissão para acessar essa página.'
+    unless current_user && current_user.role == 'owner'
+      redirect_to root_path, notice: t('notices.access.access_denied')
     end
   end
 
   def authenticate_client
-    unless current_user || current_user.role == 'client'
-      redirect_to root_path, notice: 'Você não tem permissão para acessar essa página.'
+    unless current_user && current_user.role == 'client'
+      redirect_to root_path, notice: t('notices.access.access_denied')
     end
   end
 end

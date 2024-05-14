@@ -16,7 +16,7 @@ class Api::V1::BuffetsController < ActionController::API
 
   def search
     query = params[:query]
-    query_results = Buffet.where("brand_name LIKE ?", "%#{query}%")
+    query_results = Buffet.where("LOWER(brand_name) LIKE ?", "%#{query.downcase}%")
 
     response.headers['Content-Type'] = 'application/json'
 
@@ -39,6 +39,9 @@ class Api::V1::BuffetsController < ActionController::API
     order = Order.new(buffet: buffet, event: event, event_date: event_date, total_guests: total_guests)
     order.event_date_cannot_be_in_the_past
     order.total_guests_must_be_within_event_limits
+    order.has_same_day_order?
+
+    response.headers['Content-Type'] = 'application/json'
 
     if order.errors.include?(:event_date) || order.errors.include?(:total_guests)
       return render status: 412, json: { error: order.errors.full_messages }

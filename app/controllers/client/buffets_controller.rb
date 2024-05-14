@@ -3,7 +3,6 @@ class Client::BuffetsController < ApplicationController
     query = params[:query]
     records_by_attributes = Buffet.where("brand_name LIKE :query OR company_name LIKE :query OR crn LIKE :query
                                          OR description LIKE :query", query: "%#{query}%")
-
     records_by_event = Buffet.joins(:events).where("events.name LIKE :query OR events.description LIKE :query",
                                                    query: "%#{query}%")
 

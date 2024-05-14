@@ -1,5 +1,5 @@
 class Owner::BuffetsController < ApplicationController
-  before_action :authenticate_owner, only: [:new, :create, :edit, :update]
+  before_action :authenticate_owner, only: [:new, :create, :edit, :update, :show]
   before_action :set_buffet, only: [:edit, :show, :edit, :update]
   before_action :check_buffet_owner, only: [:edit, :update]
 
@@ -12,9 +12,9 @@ class Owner::BuffetsController < ApplicationController
     @buffet = Buffet.new(buffet_params)
     @buffet.user = current_user
     if @buffet.save
-      return redirect_to owner_buffet_path(@buffet), notice: "#{@buffet.brand_name} criado com sucesso!"
+      return redirect_to owner_buffet_path(@buffet), notice: t("notices.create.success", model_name: Buffet.model_name.human)
     end
-    flash.now[:notice] = 'Problemas ao criar Buffet'
+    flash.now[:notice] = t("notices.create.fail", model_name: Buffet.model_name.human.downcase)
     render 'new'
   end
 
@@ -24,9 +24,9 @@ class Owner::BuffetsController < ApplicationController
 
   def update
     if @buffet.update(buffet_params)
-      return redirect_to owner_buffet_path(@buffet), notice: 'Buffet atualizado com sucesso'
+      return redirect_to owner_buffet_path(@buffet), notice: t("notices.update.success", model_name: Buffet.model_name.human)
     end
-    flash.now[:notice] = 'Erro ao atualizar Buffet'
+    flash.now[:notice] = t("notices.update.fail", model_name: Buffet.model_name.human.downcase)
     render 'edit'
   end
 
@@ -45,6 +45,6 @@ class Owner::BuffetsController < ApplicationController
 
   def check_buffet_owner
     set_buffet
-    redirect_to root_path, notice: "Acesso negado." if current_user != @buffet.user
+    redirect_to root_path, notice: t("notices.access.access_denied") if current_user != @buffet.user
   end
 end

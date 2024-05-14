@@ -36,12 +36,10 @@ class Api::V1::BuffetsController < ActionController::API
     event_date = Date.parse(params[:event_date])
     total_guests = params[:total_guests]
 
-    puts "cheguei aqui"
-
     order = Order.new(buffet: buffet, event: event, event_date: event_date, total_guests: total_guests)
     order.event_date_cannot_be_in_the_past
     order.total_guests_must_be_within_event_limits
-    puts order.has_same_day_order?
+    order.has_same_day_order?
 
     response.headers['Content-Type'] = 'application/json'
 

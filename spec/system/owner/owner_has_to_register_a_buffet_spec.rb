@@ -62,7 +62,7 @@ describe "Owner has to register a Buffet" do
     click_on 'Criar Buffet'
 
     expect(current_path).to eq owner_buffet_path(1)
-    expect(page).to have_content "Buffet do Mateus criado com sucesso!"
+    expect(page).to have_content "Buffet criado com sucesso"
     expect(page).to have_content 'M.A. LTDA'
     expect(page).to have_content '23.261.499/0001-96'
     expect(page).to have_content '(83)95555-5555'

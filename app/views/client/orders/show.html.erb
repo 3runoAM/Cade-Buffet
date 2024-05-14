@@ -34,7 +34,7 @@
 </dl>
 
 <% if @order.status == "approved" && @order.status == "confirmed" %>
-  <h2>Resposta do Buffet</h2>
+  <h2><%= I18n.t("helpers.models.order.buffet_answer") %></h2>
   <dt><%= Order.human_attribute_name :adjustment %>:</dt>
   <dd><%= number_to_currency(@order.adjustment) %></dd>
   <br/>

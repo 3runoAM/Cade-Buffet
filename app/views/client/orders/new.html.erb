@@ -1,18 +1,10 @@
-<h1>Solicitação de evento</h1>
+<h1><%= I18n.t("helpers.models.order.new_order") %></h1>
 
-<% if @order.errors.any? %>
-  <p>Verifique os erros abaixo</p>
-  <ul>
-    <% @order.errors.full_messages.each do |e| %>
-      <li><%= e %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render partial: "shared/errors_exhibition", locals: {model: @order} %>
 
 <dl>
-  <dt>Buffet:</dt>
-  <dd><%= @buffet.brand_name %></dd>
-  <dt>Evento:</dt>
+  <dt><%= @buffet.brand_name %></dt>
+  <dt><%= Event.model_name.human %>:</dt>
   <dd><%= @event.name %></dd>
 </dl>
 
@@ -46,5 +38,5 @@
   <%= order.hidden_field :buffet_id, value: @buffet.id %>
   <%= order.hidden_field :event_id, value: @event.id %>
 
-  <%= order.submit 'Solicitar evento'%>
+  <%= order.submit I18n.t("helpers.models.order.submit")%>
 <% end %>

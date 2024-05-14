@@ -129,7 +129,7 @@ RSpec.describe "Buffets", type: :request do
       end
     end
 
-    context "GET /api/v1/buffets/:query" do
+    context "GET /api/v1/buffets/search/:query" do
       it 'sucessfully' do
         payment_method_a = PaymentMethod.create!(name: 'Payment Method 1')
         payment_method_b = PaymentMethod.create!(name: 'Payment Method 2')

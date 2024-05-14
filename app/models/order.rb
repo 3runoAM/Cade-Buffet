@@ -56,8 +56,8 @@ class Order < ApplicationRecord
   end
 
   def has_same_day_order?
-    Order.where("id != ? AND event_date = ? AND buffet_id = ? AND status != ? OR status != ?",
-                id, event_date, buffet_id, "rejected", "pending").any?
+    Order.where("event_id = ? AND event_date = ? AND buffet_id = ? AND (status != ? OR status != ?)",
+                event_id, event_date, buffet_id, "rejected", "pending").any?
   end
 
   def self.adjustment_type_options

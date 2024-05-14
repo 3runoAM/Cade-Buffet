@@ -29,11 +29,11 @@
   <dd><%= I18n.t("activerecord.attributes.order.statuses.#{@order.status}")%></dd>
 </dl>
 
-<%= link_to "Falar com o cliente", messages_path(order_id: @order.id) %>
+<%= link_to I18n.t("helpers.models.order.message_client"), messages_path(order_id: @order.id) %>
 
 <% if @order.status == 'pending' %>
   <div>
-    <%= link_to 'Analisar solicitação',edit_owner_order_path(@order.id) %>
-    <%= button_to 'Rejeitar solicitação', owner_order_path(@order, order: { status: :rejected }), method: :patch %>
+    <%= link_to I18n.t("helpers.models.order.analyze_request"),edit_owner_order_path(@order.id) %>
+    <%= button_to I18n.t("helpers.models.order.reject_request"), owner_order_path(@order, order: { status: :rejected }), method: :patch %>
   </div>
 <% end %>

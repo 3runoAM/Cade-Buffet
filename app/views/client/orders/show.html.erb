@@ -33,30 +33,10 @@
   <br/>
 </dl>
 
-<% if @order.status == "approved" && @order.status == "confirmed" %>
-  <h2><%= I18n.t("helpers.models.order.buffet_answer") %></h2>
-  <dt><%= Order.human_attribute_name :adjustment %>:</dt>
-  <dd><%= number_to_currency(@order.adjustment) %></dd>
-  <br/>
-
-  <dt><%= Order.human_attribute_name :adjustment_type %>:</dt>
-  <dd><%= I18n.t("activerecord.attributes.order.adjustment_types.#{@order.adjustment_type}") %></dd>
-  <br/>
-
-  <dt><%= Order.human_attribute_name :adjustment_description %>:</dt>
-  <dd><%= @order.adjustment_description %></dd>
-  <br/>
-
-  <dt><%= Order.human_attribute_name :payment_method_id %>:</dt>
-  <dd><%= @order.payment_method.name %></dd>
-  <br/>
-
-  <dt><%= Order.human_attribute_name :confirmation_date %>:</dt>
-  <dd><%= @order.confirmation_date.strftime("%d/%m/%Y") %></dd>
-<% end %>
+<%= render_buffet_answer(@order) %>
 <br/>
 
-<%= link_to 'Falar com o estabelecimento', messages_path(order_id: @order.id) %>
+<%= link_to I18n.t("helpers.models.order.message_owner"), messages_path(order_id: @order.id) %>
 
 <%= render_confirm_button(@order) %>
 <%= render_reject_order_button(@order) %>

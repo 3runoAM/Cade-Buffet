@@ -9,16 +9,14 @@
 </div>
 
 <div>
-  <h2>Endereço</h2>
+  <h2><%= Buffet.human_attribute_name :address %></h2>
   <p> <%= @buffet.address.full_address %></p>
 </div>
 
-<h2>Métodos de pagamento</h2>
+<h2>><%= Buffet.human_attribute_name :payment_method %></h2>
 <% @buffet.payment_methods.each do |payment_method| %>
   <p><%= payment_method.name %></p>
 <% end %>
 <br/>
 
-<% if current_user.id == @buffet.user_id %>
-  <%= link_to "Editar Buffet", edit_owner_buffet_path(@buffet) %>
-<% end %>
+<%= render_edit_buffet_button(@buffet) %>

@@ -3,6 +3,14 @@ pt-BR:
     "true": "Sim"
     "false": "Não"
   helpers:
+    dashboard:
+      owner:
+        owner_area: "Área do proprietário"
+        show_order_requests: "Ver solicitações de evento"
+        show_buffet_details: "Ver detalhes"
+      client:
+          client_area: "Área do cliente"
+      logout: "Sair"
     models:
       order:
         my_orders: "Minhas solicitações"
@@ -11,8 +19,32 @@ pt-BR:
         pending: "Solicitações pendentes"
         confirmed: "Solicitações confirmadas"
         approved: "Solicitações  aprovadas"
-        rejected: "Solicitações reijatadas"
+        rejected: "Solicitações rejeitadas"
+        any_requests: "Nenhuma socilitação deste tipo."
+        analyze_request: "Analisar solicitação"
+        reject_request: "Rejeitar solicitação"
+        approve: "Aprovar"
+        message_client: "Falar com o cliente"
+        message_owner: "Falar com o estabelecimento"
+        empty_order_list: "Nenhum pedido cadastrado"
         buffet_answer: "Resposta do buffet"
+      buffet:
+        new_buffet: "Cadastrar novo buffet"
+        registered_buffets: "Buffets cadastrados"
+        any_buffets: "Nenhum Buffet cadastrado"
+        situated_in: "Localizado em"
+        edit: "Editar Buffet"
+      event:
+        create: "Cadastrar evento"
+        edit: "Editar evento"
+        in_minutes: "em minutos"
+      event_price:
+        create: "Cadastrar preço do evento"
+        update: "Atualizar preço do evento"
+        edit: "Editar preço"
+      message:
+        query: "Buscar Buffet"
+        search: "Buscar"
   notices:
     models:
       message:
@@ -44,6 +76,7 @@ pt-BR:
       fail: "Problemas ao atualizar %{model_name}"
   error:
     invalid: "inválido"
+    verify: "Verifique os erros abaixo"
     models:
       buffet:
         at_least_one_payment_method: "deve ter no mínimo uma opção selecionada"

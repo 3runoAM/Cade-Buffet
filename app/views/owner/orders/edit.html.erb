@@ -26,17 +26,9 @@
   </dl>
 </div>
 
-<% if @order.errors.any? %>
-  <p><b>Verifique os erros abaixo</b></p>
-  <ul>
-    <% @order.errors.full_messages.each do |e| %>
-      <li><%= e %></li>
-    <% end %>
-  </ul>
-<% end %>
-
+<%= render partial: 'shared/errors_exhibition', locals: {model: @order} %>
 <div>
-  <h2>Ajustes</h2>
+  <h2><%= Order.human_attribute_name :adjustment %></h2>
   <%= form_with model: [:owner, @order] do |order| %>
     <div>
       <%= order.label :adjustment %><br/>
@@ -70,7 +62,7 @@
 
     <%= order.hidden_field :status, value: :approved %>
 
-    <%= order.submit 'Aprovar', data: {turbo: false}%>
+    <%= order.submit I18n.t("helpers.models.order.approve"), data: {turbo: false}%>
   <% end %>
 </div>
 

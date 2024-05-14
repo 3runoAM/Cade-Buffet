@@ -174,28 +174,28 @@ describe "Owner visits owner area" do
       click_on 'Ver solicitações de evento'
 
       within '#pending-orders' do
-        expect(page).to have_content 'Eventos pendentes'
+        expect(page).to have_content 'Solicitações pendentes'
         expect(page).to have_content 'CODIGO01'
         expect(page).to have_content 'Event 1'
         expect(page).to have_content 'Client ONE'
       end
 
       within '#confirmed-orders' do
-        expect(page).to have_content 'Eventos confirmados'
+        expect(page).to have_content 'Solicitações confirmadas'
         expect(page).to have_content 'CODIGO02'
         expect(page).to have_content 'Event 1'
         expect(page).to have_content 'Client ONE'
       end
 
       within '#approved-orders' do
-        expect(page).to have_content 'Eventos aprovados'
+        expect(page).to have_content 'Solicitações aprovadas'
         expect(page).to have_content 'CODIGO03'
         expect(page).to have_content 'Event 1'
         expect(page).to have_content 'Client ONE'
       end
 
       within '#rejected-orders' do
-        expect(page).to have_content 'Eventos rejeitados'
+        expect(page).to have_content 'Solicitações rejeitadas'
         expect(page).to have_content 'CODIGO04'
         expect(page).to have_content 'Event 1'
         expect(page).to have_content 'Client ONE'

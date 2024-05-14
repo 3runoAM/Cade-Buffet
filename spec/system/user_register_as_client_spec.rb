@@ -3,7 +3,7 @@ require "rails_helper"
 describe "User register as client" do
   it 'and sees all fields to do so' do
     visit root_path
-    click_on "Cadastrar"
+    click_on "Inscrever-se"
 
     within '#registration' do
       expect(page).to have_field 'Nome'
@@ -16,7 +16,7 @@ describe "User register as client" do
   end
   it 'successfully' do
     visit root_path
-    click_on "Cadastrar"
+    click_on "Inscrever-se"
 
     within '#registration' do
       fill_in 'Nome', with: 'Fulano Beltrano'

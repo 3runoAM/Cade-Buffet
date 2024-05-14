@@ -22,7 +22,7 @@ describe 'Owner register event price' do
     visit root_path
     click_on 'Área do proprietário'
     click_on 'Festa de 15 anos'
-    click_on 'Cadastrar Preço'
+    click_on 'Cadastrar preço do evento'
 
     expect(page).to have_field 'Preço mínimo'
     expect(page).to have_field 'Adicional por convidado extra'
@@ -50,7 +50,7 @@ describe 'Owner register event price' do
     visit root_path
     click_on 'Área do proprietário'
     click_on 'Festa de 15 anos'
-    click_on 'Cadastrar Preço'
+    click_on 'Cadastrar preço do evento'
 
     fill_in 'Preço mínimo', with: 1000
     fill_in 'Adicional por convidado extra', with: 50
@@ -87,7 +87,7 @@ describe 'Owner register event price' do
     visit root_path
     click_on 'Área do proprietário'
     click_on 'Festa de 15 anos'
-    click_on 'Cadastrar Preço'
+    click_on 'Cadastrar preço do evento'
 
     fill_in 'Preço mínimo', with: 2000
     fill_in 'Adicional por convidado extra', with: 100

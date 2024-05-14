@@ -1,0 +1,19 @@
+<h2><%= I18n.t("helpers.models.order.buffet_answer") %></h2>
+<dt><%= Order.human_attribute_name :adjustment %>:</dt>
+<dd><%= number_to_currency(model.adjustment) %></dd>
+<br/>
+
+<dt><%= Order.human_attribute_name :adjustment_type %>:</dt>
+<dd><%= I18n.t("activerecord.attributes.order.adjustment_types.#{model.adjustment_type}") %></dd>
+<br/>
+
+<dt><%= Order.human_attribute_name :adjustment_description %>:</dt>
+<dd><%= model.adjustment_description %></dd>
+<br/>
+
+<dt><%= Order.human_attribute_name :payment_method_id %>:</dt>
+<dd><%= model.payment_method.name %></dd>
+<br/>
+
+<dt><%= Order.human_attribute_name :confirmation_date %>:</dt>
+<dd><%= model.confirmation_date.strftime("%d/%m/%Y") %></dd>

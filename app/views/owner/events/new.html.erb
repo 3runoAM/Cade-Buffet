@@ -1,13 +1,6 @@
-<h1>Novo Evento</h1>
+<h1><%= I18n.t("helpers.models.event.create") %></h1>
 
-<% if @event.errors.any? %>
-  <p>Verifique os erros abaixo</p>
-  <ul>
-    <% @event.errors.full_messages.each do |e| %>
-      <li><%= e %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render partial: 'shared/errors_exhibition', locals: {model: @event} %>
 
 <%= form_with model: [:owner, @buffet, @event] do |event| %>
   <div>
@@ -35,7 +28,7 @@
   <br/>
 
   <div>
-    <%= event.label :standard_duration %> (em minutos)
+    <%= event.label :standard_duration %> (<%= I18n.t("helpers.models.event.in_minutes") %>)
     <%= event.number_field :standard_duration %>
   </div>
   <br/>

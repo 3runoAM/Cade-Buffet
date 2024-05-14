@@ -1,14 +1,6 @@
-<h1>Cadastrar novo Buffet</h1>
+<h1><%= I18n.t("helpers.models.buffet.new_buffet") %></h1>
 
-
-<% if @buffet.errors.any? %>
-  <p>Verifique os erros abaixo: </p>
-  <ul>
-    <% @buffet.errors.full_messages.each do |e| %>
-      <li> <%= e %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render partial: "shared/errors_exhibition", locals: {model: @buffet} %>
 
 <%= form_with model: [:owner, @buffet] do |buffet| %>
   <div>

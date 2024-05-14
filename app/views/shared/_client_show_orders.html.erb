@@ -1,5 +1,5 @@
 <% if orders_list.empty? %>
-  <p>Nenhum pedido cadastrado.</p>
+  <p><%= I18n.t("helpers.models.order.empty_order_list") %></p>
 <% else %>
   <% orders_list.each do |order| %>
     <dl>

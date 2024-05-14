@@ -3,7 +3,7 @@ require "rails_helper"
 describe "User register as buffet owner" do
   it 'and form should have all necessary fields to do so' do
     visit root_path
-    click_on "Cadastrar"
+    click_on "Inscrever-se"
 
     within '#registration' do
       expect(page).to have_field 'Nome'

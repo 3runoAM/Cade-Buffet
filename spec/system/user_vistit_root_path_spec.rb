@@ -6,7 +6,7 @@ describe "User visits root path" do
 
     within('#nav') do
       expect(page).to have_content "Cadê Buffet?"
-      expect(page).to have_link "Cadastrar"
+      expect(page).to have_link "Inscrever-se"
       expect(page).to have_link "Login"
     end
 

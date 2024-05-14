@@ -1,13 +1,6 @@
 <h1>Preço para <%= @event.name %></h1>
 
-<% if @event_price.errors.any? %>
-  <p>Verifique os erros abaixo:</p>
-  <ul>
-    <% @event_price.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render partial: 'shared/errors_exhibition', locals: {model: @event_price} %>
 
 <%= form_with model: [:owner, @event_price] do |price|%>
   <div>
@@ -35,5 +28,5 @@
 
   <%= price.hidden_field :event_id, value: @event.id %>
 
-  <%= price.submit "Atualizar preço do evento", data: { turbo: false }%>
+  <%= price.submit I18n.t("helpers.models.event_price.update"), data: { turbo: false }%>
 <% end %>

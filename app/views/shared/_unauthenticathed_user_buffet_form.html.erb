@@ -1,12 +1,12 @@
 <% if @buffets.empty? %>
-<p>Nenhum Buffet cadastrado</p>
+<p><%= I18n.t("helpers.models.buffet.any_buffets") %></p>
 <% else %>
-<h2>Buffets cadastrados:</h2>
+<h2><%= I18n.t("helpers.models.buffet.registered_buffets") %>:</h2>
 <dl id="buffets">
     <% @buffets.each do |buffet| %>
     <div>
       <dt><%= link_to buffet.brand_name, home_path(buffet.id) %></dt>
-      <dd>Localizado em: <%= buffet.address.city %> - <%= buffet.address.state %></dd>
+      <dd><%= I18n.t("helpers.models.buffet.situated_in") %>: <%= buffet.address.city %> - <%= buffet.address.state %></dd>
     </div>
     <% end %>
 </dl>

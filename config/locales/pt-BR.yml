@@ -2,6 +2,17 @@ pt-BR:
   boolean:
     "true": "Sim"
     "false": "Não"
+  helpers:
+    models:
+      order:
+        my_orders: "Minhas solicitações"
+        new_order: "Nova solicitação"
+        submit: "Solicitar evento"
+        pending: "Solicitações pendentes"
+        confirmed: "Solicitações confirmadas"
+        approved: "Solicitações  aprovadas"
+        rejected: "Solicitações reijatadas"
+        buffet_answer: "Resposta do buffet"
   notices:
     models:
       message:

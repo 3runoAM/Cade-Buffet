@@ -27,7 +27,7 @@ describe "Client places order" do
       end
 
       expect(current_path).to eq new_client_order_path
-      expect(page).to have_content "Buffet: Buffet 1"
+      expect(page).to have_content "Buffet 1"
       expect(page).to have_content "Evento: Event 1"
       expect(page).to have_field "Data do evento"
       expect(page).to have_field "Número de convidados"
@@ -50,7 +50,7 @@ describe "Client places order" do
       end
 
       expect(current_path).to eq new_client_order_path
-      expect(page).to have_content "Buffet: Buffet 2"
+      expect(page).to have_content "Buffet 2"
       expect(page).to have_content "Evento: Event 2"
       expect(page).to have_field "Data do evento"
       expect(page).to have_field "Número de convidados"
@@ -171,7 +171,7 @@ describe "Client places order" do
     click_on "Área do cliente"
 
     expect(current_path).to eq client_dashboards_path
-    expect(page).to have_content "Meus pedidos"
+    expect(page).to have_content "Minhas solicitações"
     expect(page).to have_content "CODIGO12"
     expect(page).to have_content 1.month.from_now.next_weekday.strftime('%d/%m/%Y')
   end

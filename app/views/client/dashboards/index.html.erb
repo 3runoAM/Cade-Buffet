@@ -1,21 +1,21 @@
-<h1>Meus pedidos</h1>
+<h1><%= I18n.t("helpers.models.order.my_orders") %></h1>
 
 <div id='pending-orders'>
-  <h2>Eventos pendentes</h2>
+  <h2><%= I18n.t("helpers.models.order.pending") %></h2>
   <%= render partial: 'shared/client_show_orders', locals: {orders_list: @pending_orders} %>
 </div>
 
 <div id='confirmed-orders'>
-  <h2>Eventos confirmados</h2>
+  <h2><%= I18n.t("helpers.models.order.confirmed") %></h2>
   <%= render partial: 'shared/client_show_orders', locals: {orders_list: @confirmed_orders} %>
 </div>
 
 <div id='approved-orders'>
-  <h2>Eventos aprovados</h2>
+  <h2><%= I18n.t("helpers.models.order.approved") %></h2>
   <%= render partial: 'shared/client_show_orders', locals: {orders_list: @approved_orders} %>
 </div>
 
 <div id='rejected-orders'>
-  <h2>Eventos rejeitados</h2>
+  <h2><%= I18n.t("helpers.models.order.rejected") %></h2>
   <%= render partial: 'shared/client_show_orders', locals: {orders_list: @rejected_orders} %>
 </div>

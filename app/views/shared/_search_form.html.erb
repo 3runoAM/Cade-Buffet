@@ -1,6 +1,6 @@
 <%= form_with url: search_client_buffets_url, method: :get, id: 'search' do |f| %>
-  <%= f.label :query, 'Buscar Buffet' %>
+  <%= f.label :query, I18n.t("helpers.models.message.query") %>
   <%= f.text_field :query %>
 
-  <%= f.button 'Buscar' %>
+  <%= f.button I18n.t("helpers.models.message.search") %>
 <% end %>

@@ -10,4 +10,10 @@ module OrdersHelper
       button_to 'Rejeitar evento', client_order_path(order, order: { status: :rejected} ), method: :patch
     end
   end
+
+  def render_buffet_answer(order)
+    if order.status == "approved" || @order.status == "confirmed"
+      render partial: "shared/order_details", locals: {model: order}
+    end
+  end
 end

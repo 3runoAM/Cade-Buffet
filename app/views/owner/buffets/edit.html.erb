@@ -1,16 +1,8 @@
-<h1>Editando <%= @buffet.brand_name %></h1>
+<h1><%= @buffet.brand_name %></h1>
+
+<%= render partial: "shared/errors_exhibition", locals: {model: @buffet} %>
 
 <%= form_with model: [:owner, @buffet] do |buffet| %>
-
-  <% if @buffet.errors.any? %>
-    <p>Verifique os erros abaixo: </p>
-    <ul>
-      <% @buffet.errors.full_messages.each do |e| %>
-        <li> <%= e %></li>
-      <% end %>
-    </ul>
-  <% end %>
-
   <div>
     <%= buffet.label :brand_name %><br/>
     <%= buffet.text_field :brand_name %>

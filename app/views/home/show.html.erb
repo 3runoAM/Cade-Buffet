@@ -24,7 +24,7 @@
     <div>
       <h3><%= event.name %></h3>
       <p><%= event.description %></p>
-      <p>Número de convidados: de <%= event.min_and_max_guests_format %></p>
+      <p><%= Order.human_attribute_name :total_guests %>: de <%= event.min_and_max_guests_format %></p>
       <p><%= Event.human_attribute_name(:standard_duration) %>: <%= event.convert_to_hours %></p>
       <p><%= Event.human_attribute_name(:menu) %>: <%= event.menu %></p>
       <div>
@@ -51,9 +51,9 @@
           <% end %>
         </dl>
       </div>
-      <% if user_signed_in? %>
-        <%= link_to 'Solicitar evento', new_client_order_path(buffet_id: @buffet.id, event_id: event.id) %>
-      <% end %>
+
+      <%= render_request_order_button(@buffet.id, event.id) %>
+
     </div>
     <br/>
   <% end %>

@@ -1,5 +1,5 @@
 def sign_up
-  click_on "Cadastrar"
+  click_on "Inscrever-se"
   within '#registration' do
     fill_in 'Nome', with: 'Mateus Alves'
     select 'Proprietário de Buffet', from: 'Tipo de conta'

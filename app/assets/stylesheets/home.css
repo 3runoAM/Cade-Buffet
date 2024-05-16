@@ -1,0 +1,26 @@
+.main-title {
+    font-family: var(--poetsen-one);
+    letter-spacing: 0.1rem;
+}
+
+.nav-background {
+    height: 5rem;
+    box-shadow: 0 0.1rem 0.9rem -0.1rem var(--black);
+}
+
+.nav-content {
+    width: 100%;
+    gap: 25%;
+    margin: 0 5px;
+}
+
+.session-link {
+    width: 6rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+#buffets{
+    height: 15rem;
+    overflow-y: scroll;
+}

@@ -1,0 +1,67 @@
+:root {
+    --poetsen-one: "Poetsen One", serif;
+    --roboto: "Roboto", serif;
+    --black: #000;
+    --happy-zebra: #f3f5f5
+}
+
+body {
+    background-color: var(--happy-zebra);
+    font-family: var(--roboto);
+    margin: 0;
+}
+
+.content-container {
+    margin-left: 2rem;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-vertical {
+    display: flex;
+    flex-direction: column;
+}
+
+.align {
+    justify-content: center;
+    align-items: center;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
+.gap{
+    gap: 25%;
+}
+
+.link-disguise {
+    text-decoration: none;
+    color: var(--black);
+}
+
+.link-disguise:hover {
+    color: darkblue;
+    text-decoration: underline;
+}
+
+.hidden-label {
+    position: absolute;
+    clip: rect(1px 1px 1px 1px);
+    border: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+
+.mini-card {
+    width: 20rem;
+    background: white;
+}

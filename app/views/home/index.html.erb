@@ -1,4 +1,4 @@
-<h1>Boas-vindas ao Cadê Buffet!</h1>
+<h1 class="title">Boas-vindas ao Cadê Buffet!</h1>
 
 <% if !user_signed_in? || current_user.role == 'client' %>
   <%= render 'shared/unauthenticathed_user_buffet_form', local: {buffets: @buffets} %>

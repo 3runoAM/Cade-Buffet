@@ -1,6 +1,8 @@
-<%= form_with url: search_client_buffets_url, method: :get, id: 'search' do |f| %>
-  <%= f.label :query, I18n.t("helpers.models.message.query") %>
-  <%= f.text_field :query %>
+<%= form_with url: search_client_buffets_url, method: :get, id: 'search', class: 'flex align' do |f| %>
+  <%= f.label :query, I18n.t("helpers.models.message.query"), class: 'hidden-label' %>
+  <div class="flex input-button-container">
+    <%= f.text_field :query, placeholder: "Buscar Buffet", class: 'search-input' %>
 
-  <%= f.button I18n.t("helpers.models.message.search") %>
+    <%= f.button I18n.t("helpers.models.message.search"), class: "search-button" %>
+  </div>
 <% end %>

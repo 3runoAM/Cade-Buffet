@@ -9,6 +9,6 @@ class Client::BuffetsController < ApplicationController
     @buffets = (records_by_attributes + records_by_event).uniq
     @buffets.sort_by { |buffet| buffet.brand_name }
 
-    render partial: 'shared/unauthenticathed_user_buffet_form', locals: { buffets: @buffets }
+    render 'home/index', locals: { buffets: @buffets }
   end
 end

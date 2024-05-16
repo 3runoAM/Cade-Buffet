@@ -2,9 +2,9 @@
 <p><%= I18n.t("helpers.models.buffet.any_buffets") %></p>
 <% else %>
 <h2><%= I18n.t("helpers.models.buffet.registered_buffets") %>:</h2>
-<dl id="buffets">
+<dl id="buffets" class="flex-vertical space-around">
     <% @buffets.each do |buffet| %>
-    <div>
+    <div class="mini-card">
       <dt><%= link_to buffet.brand_name, home_path(buffet.id) %></dt>
       <dd><%= I18n.t("helpers.models.buffet.situated_in") %>: <%= buffet.address.city %> - <%= buffet.address.state %></dd>
     </div>

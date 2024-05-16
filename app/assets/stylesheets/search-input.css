@@ -1,0 +1,24 @@
+.input-button-container {
+    width: 100%;
+    gap: 5%
+}
+
+.search-input {
+    height: 2rem;
+    width: 15rem;
+
+    border: none;
+    border-radius: 0.5rem;
+}
+
+/* Para suporte ao Chrome, Safari e Opera */
+.search-input::-webkit-input-placeholder {
+    padding: 0.8rem;
+    font-family: var(--roboto);
+}
+
+.search-button {
+    border: none;
+    font-family: var(--roboto);
+    background: transparent;
+}

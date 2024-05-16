@@ -8,34 +8,48 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
   </head>
 
-  <body>
-    <nav id="nav">
-      <h1><%= link_to "Cadê Buffet?", root_path %></h1>
-      <ul>
-        <% if user_signed_in? %>
-          <p><%= current_user_info %></p>
+  <body class="flex-vertical">
+    <nav id="nav" class="flex align space-around nav-background">
+      <div class="flex align space-around nav-content">
+        <h1><%= link_to "Cadê Buffet?", root_path, class: 'link-disguise main-title'%></h1>
 
-          <% if current_user.role == 'owner' %>
-          <li><%= link_to I18n.t("helpers.dashboard.owner.owner_area"), owner_dashboards_path %></li>
+        <%= render 'shared/search_form' %>
+
+        <ul class="flex align session-link-container">
+          <% if user_signed_in? %>
+            <p><%= current_user_info %></p>
+
+            <% if current_user.role == 'owner' %>
+              <li class="session-link link-disguise"><%= link_to I18n.t("helpers.dashboard.owner.owner_area"), owner_dashboards_path %></li>
+            <% else %>
+              <%= render 'shared/search_form' %>
+              <li class="session-link link-disguise"><%= link_to I18n.t("helpers.dashboard.client.client_area"), client_dashboards_path %></li>
+            <% end %>
+            <li class="session-link"><%= button_to I18n.t("helpers.dashboard.logout"), destroy_user_session_path, method: :delete %></li>
+
           <% else %>
-            <%= render 'shared/search_form' %>
-            <li><%= link_to I18n.t("helpers.dashboard.client.client_area"), client_dashboards_path %></li>
+            <div class="flex gap align session-link-container">
+              <li class="flex align"><%= link_to I18n.t("devise.registrations.new.sign_up"), new_user_registration_path, class: 'session-link link-disguise'%></li>
+              <li class="flex align"><%= link_to I18n.t("devise.sessions.new.sign_in"), new_user_session_path, class: 'session-link link-disguise' %></li>
+            </div>
           <% end %>
-          <li><%= button_to I18n.t("helpers.dashboard.logout"), destroy_user_session_path, method: :delete %></li>
-
-        <% else %>
-          <%= render 'shared/search_form' %>
-          <li><%= link_to I18n.t("devise.registrations.new.sign_up"), new_user_registration_path %></li>
-          <li><%= link_to I18n.t("devise.sessions.new.sign_in"), new_user_session_path %></li>
-        <% end %>
-      </ul>
+        </ul>
+      </div>
     </nav>
 
-    <%= notice %>
-    <%= alert %>
+    <div class="flex-vertical space-around content-container">
+      <%= notice %>
+      <%= alert %>
 
-    <%= yield %>
+      <%= yield %>
+    </div>
   </body>
 </html>

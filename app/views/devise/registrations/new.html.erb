@@ -11,7 +11,7 @@
 
   <div class="field">
     <%= f.label :role %><br/>
-    <%= f.collection_select :role, User.role_options, :first, :last %>
+    <%= f.collection_radio_buttons :role, User.role_options, :first, :last %>
   </div>
   <br/>
 

@@ -17,32 +17,32 @@
   </head>
 
   <body class="flex-vertical">
-    <nav id="nav" class="flex align space-around nav-background">
-      <div class="flex align space-around nav-content">
-        <h1><%= link_to "Cadê Buffet?", root_path, class: 'link-disguise main-title'%></h1>
+    <nav id="nav" class="nav-background">
+        <ul class="flex align nav-content">
+          <h1><%= link_to "Cadê Buffet?", root_path, class: 'link-disguise main-title'%></h1>
 
-        <%= render 'shared/search_form' %>
+          <%= render 'shared/search_form' %>
 
-        <ul class="flex align session-link-container">
-          <% if user_signed_in? %>
-            <p><%= current_user_info %></p>
-
-            <% if current_user.role == 'owner' %>
-              <li class="session-link link-disguise"><%= link_to I18n.t("helpers.dashboard.owner.owner_area"), owner_dashboards_path %></li>
-            <% else %>
-              <%= render 'shared/search_form' %>
-              <li class="session-link link-disguise"><%= link_to I18n.t("helpers.dashboard.client.client_area"), client_dashboards_path %></li>
-            <% end %>
-            <li class="session-link"><%= button_to I18n.t("helpers.dashboard.logout"), destroy_user_session_path, method: :delete %></li>
+          <div class="flex logged-links">
+            <% if user_signed_in? %>
+              <% if current_user.role == 'owner' %>
+                <li class="logged-link"><%= link_to I18n.t("helpers.dashboard.owner.owner_area"), owner_dashboards_path, class: "link-disguise" %></li>
+              <% else %>
+                <li class="logged-link"><%= link_to I18n.t("helpers.dashboard.client.client_area"), client_dashboards_path, class: "link-disguise" %></li>
+              <% end %>
+              <div class="flex align user-info">
+                <%= current_user_info %>
+                <li class="session-link"><%= button_to I18n.t("helpers.dashboard.logout"), destroy_user_session_path, method: :delete %></li>
+              </div>
+          </div>
 
           <% else %>
-            <div class="flex gap align session-link-container">
+            <div class="flex align gap">
               <li class="flex align"><%= link_to I18n.t("devise.registrations.new.sign_up"), new_user_registration_path, class: 'session-link link-disguise'%></li>
               <li class="flex align"><%= link_to I18n.t("devise.sessions.new.sign_in"), new_user_session_path, class: 'session-link link-disguise' %></li>
             </div>
           <% end %>
         </ul>
-      </div>
     </nav>
 
     <div class="flex-vertical space-around content-container">

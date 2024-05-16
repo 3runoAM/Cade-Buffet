@@ -1,6 +1,6 @@
 .input-button-container {
     width: 100%;
-    gap: 5%
+    gap: 4%
 }
 
 .search-input {
@@ -19,6 +19,10 @@
 
 .search-button {
     border: none;
+    border-radius: 0.5rem;
     font-family: var(--roboto);
-    background: transparent;
+    font-weight: bold;
+    background: lightblue;
+
+    cursor: pointer;
 }

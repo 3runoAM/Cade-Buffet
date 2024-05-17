@@ -1,43 +1,39 @@
 .main-title {
     font-family: var(--poetsen-one);
     letter-spacing: 0.1rem;
+    margin-left: 2rem;
 }
 
 .nav-background {
     height: 5rem;
     box-shadow: 0 0.1rem 0.9rem -0.1rem var(--black);
-    justify-content: center;
-}
-
-.logged-links {
-    gap: 2rem;
-    align-items: center;
-}
-
-.logged-link {
-    width: 9rem;
-}
-
-.user-info{
-    gap: 2rem;
 }
 
 .nav-content {
-    width: 100%;
-    margin: 0 5px;
-    align-items: center;
-    justify-content: center;
+    margin: 0;
     gap: 20rem;
 }
 
-.session-link-container{
-    width: 30rem;
+.align-center {
+    align-items: center;
 }
 
-.session-link {
-    width: 6rem;
-    font-weight: 600;
-    font-size: 1.1rem;
+.create-session-links {
+    justify-self: right;
+    gap: 2rem
+}
+
+.search-links-container {
+    gap: 40rem;
+}
+
+.user-info {
+    gap: 2rem;
+}
+
+.user-area {
+    align-items: center;
+    gap: 10rem;
 }
 
 #buffets{

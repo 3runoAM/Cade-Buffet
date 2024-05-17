@@ -29,19 +29,6 @@ ul {
     flex-direction: column;
 }
 
-.align {
-    justify-content: center;
-    align-items: center;
-}
-
-.space-around {
-    justify-content: space-around;
-}
-
-.gap{
-    gap: 25%;
-}
-
 .link-disguise {
     font-weight: 600;
     text-decoration: none;
